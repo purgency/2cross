@@ -12,6 +12,7 @@ public class Move2Engine extends AbstractEngine
     {
         setNums(position);
         Set<String> unplayed = unplayed(position);
+        Set<String> played = played(position);
         
         List<String> consider = new ArrayList<String>();
         
@@ -29,7 +30,7 @@ public class Move2Engine extends AbstractEngine
             Set<String> removal = new HashSet<String>();
             for(String move : consider)
             {
-                if(!unplayed.contains(move))
+                if(played.contains(move))
                 {
                     removal.add(move);
                 }

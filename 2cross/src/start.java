@@ -4,7 +4,7 @@ public class start
 {
     public static void main(String[] args)
     {
-        String LINE = "f3";
+        String LINE = "f1h9";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 

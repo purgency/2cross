@@ -119,6 +119,20 @@ public abstract class AbstractEngine
         return unplayed;
     }
     
+    public HashSet<String> played(String position)
+    {
+        HashSet<String> played = new HashSet<String>();
+        
+        for (String line : _all)
+        {
+            if(position.contains(line))
+            {
+                played.add(line);
+            }
+        }
+        return played;
+    }
+    
     public void setNums(String position)
     {
         String substring;
