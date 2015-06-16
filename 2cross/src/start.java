@@ -18,6 +18,12 @@ public class start
 
     }
     
+    /**
+     * Chooses the engine to use based on the turnnumber
+     * @param game the position
+     * @param turn the turnnumber
+     * @return
+     */
     public static String play(String game, int turn)
     {
         String position = game;
@@ -47,6 +53,11 @@ public class start
         return move;
     }
 
+    /**
+     * turns trmph-line into one the AI can understand
+     * @param trmph the trmph-line
+     * @return the position in AI-language
+     */
     public static String convert(String trmph)
     {
         String line = trmph;
@@ -72,6 +83,12 @@ public class start
         return line;
     }
     
+    /**
+     * determines turnnumber and
+     * initializes the valuemap
+     * @param position the position
+     * @return the determined turnnumber
+     */
     public static int getturn(String position)
     {
         String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6", "d4",

@@ -17,6 +17,7 @@ public class Move2Engine extends AbstractEngine
         _boxmap = boxmap;
     }
     
+    @Override
     public String chooseMove(String position)
     {
         setNums(position);

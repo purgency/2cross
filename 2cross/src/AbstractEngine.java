@@ -105,6 +105,11 @@ public abstract class AbstractEngine
         return _corner.contains(move);
     }
     
+    /**
+     * returns set of unplayed lines
+     * @param position the position
+     * @return the set
+     */
     public HashSet<String> unplayed(String position)
     {
         HashSet<String> unplayed = new HashSet<String>();
@@ -116,6 +121,11 @@ public abstract class AbstractEngine
         return unplayed;
     }
     
+    /**
+     * returns set of played line
+     * @param position the position
+     * @return the set
+     */
     public HashSet<String> played(String position)
     {
         HashSet<String> played = new HashSet<String>();
@@ -127,6 +137,10 @@ public abstract class AbstractEngine
         return played;
     }
     
+    /**
+     * sets values for the classvariables (how many moves of a certain type are played)
+     * @param position the position
+     */
     public void setNums(String position)
     {
         String substring;
@@ -160,7 +174,12 @@ public abstract class AbstractEngine
     
     //getInnerParallelNeighbor
     
-    //
+    //getAdjacentNeighbor
  
+    /**
+     * Algorithm to determine the move to play, individually different for each turn
+     * @param position the position
+     * @return the move to play
+     */
     public abstract String chooseMove(String position);
 }

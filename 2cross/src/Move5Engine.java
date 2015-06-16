@@ -12,9 +12,12 @@ public class Move5Engine extends AbstractEngine
         _valuemap = valuemap;
     }
 
+    @Override
     public String chooseMove(String position)
     {
         Set<String> unplayed = unplayed(position);
+        Set<String> played = played(position);
+        
         return null;
     }
 }

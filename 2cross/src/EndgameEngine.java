@@ -15,6 +15,10 @@ public class EndgameEngine extends AbstractEngine
     public String chooseMove(String position)
     {
         Set<String> unplayed = unplayed(position);
+        Set<String> played = played(position);
+        
+        //AlphaBeta(position);
+        
         return null;
     }
 }
