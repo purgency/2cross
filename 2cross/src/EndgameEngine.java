@@ -11,6 +11,8 @@ public class EndgameEngine extends AbstractEngine
     
     public String chooseMove(String position)
     {
+        //checkforsacrifices and loonymoves
+        
         Set<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
         

@@ -13,6 +13,8 @@ public class Move5Engine extends AbstractEngine
     @Override
     public String chooseMove(String position)
     {
+        //checkforsacrifices and loonymoves
+        
         Set<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
         
