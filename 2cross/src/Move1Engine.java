@@ -8,7 +8,7 @@ public class Move1Engine extends AbstractEngine
         
         for (String line : _all)
         {
-            if(_center.contains(line) || _edge.contains(line))
+            if(inCenter(line) || isEdge(line))
             {
                 consider.add(line);
             }

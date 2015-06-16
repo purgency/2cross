@@ -19,6 +19,17 @@ public abstract class AbstractEngine
     public static final Set<String> _edge = new HashSet<String>(Arrays.asList("a04", "a06", "a08", "d11", "f11", "h11", "k08", "k06", "k04", "h01", "f01", "d01"));
     public static final Set<String> _corner = new HashSet<String>(Arrays.asList("a10", "b11", "j11", "k10", "a02", "b01", "j01", "k02"));
    
+    public int numEdge = 0;
+    public int numCenter = 0;
+    public int numHorizontal = 0;
+    public int numVertical = 0;
+    public int numTop = 0;
+    public int numBottom = 0;
+    public int numLeft = 0;
+    public int numRight = 0;
+    public int numThirdRow = 0;
+    public int numCenterspoke = 0;
+    
     public boolean isHorizontal(String move)
     {
         return _horizontal.contains(move);
@@ -106,6 +117,56 @@ public abstract class AbstractEngine
             }
         }
         return unplayed;
+    }
+    
+    public void setNums(String position)
+    {
+        String substring;
+        for(int i=0;position.length()>0;i+=3)
+        {
+            substring = position.substring(i, i+3);
+            if(isEdge(substring))
+            {
+                numEdge++;
+            }
+            if(inCenter(substring))   
+            {
+                numCenter++;
+            }
+            if(isHorizontal(substring))
+            {
+                numHorizontal++;
+            }
+            if(isVertical(substring))
+            {
+                numVertical++;
+            }
+            if(atTop(substring))
+            {
+                numTop++;
+            }
+            if(atBottom(substring))
+            {
+                numBottom++;
+            }
+            if(atLeft(substring))
+            {
+                numLeft++;
+            }
+            if(atRight(substring))
+            {
+                numRight++;
+            }
+            if(onThirdrow(substring))
+            {
+                numThirdRow++;
+            }
+            if(isCenterspoke(substring))
+            {
+                numCenterspoke++;
+            }
+
+        }
     }
     
     //Nim()
