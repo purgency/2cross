@@ -177,9 +177,39 @@ public abstract class AbstractEngine
     
     //numQuads()
     
-    //isParallelNeighbor
+    //wallOfBox(move, box)
     
-    //getAdjacentNeighbor
+    public boolean isParallelNeighbor(String Neighbor, String of)
+    {
+        boolean result = false;
+        int num = Integer.parseInt(of.substring(1, 3));
+        String let = of.substring(0, 1);
+        String numP2 = Integer.toString(num + 2);
+        String numM2 = Integer.toString(num - 2);
+        String letP2 = null;
+        String letM2 = null;
+        
+        if(isHorizontal(of))
+        {
+            if(Neighbor.equals(let + numP2) || Neighbor.equals(let + numM2)) result = true;
+        }
+        else
+        {
+            String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"};
+            for(int i=0;i<abc.length;i++)
+            {
+                if(let.equals(abc[i]))
+                {
+                    if(!let.equals("j") && !let.equals("k")) letP2 = abc[i+2];
+                    if(!let.equals("b") && !let.equals("a")) letM2 = abc[i-2];
+                }
+            }
+            if(Neighbor.equals(letP2 + num) || Neighbor.equals(letM2 + num)) result = true;
+        }
+        return result;
+    }
+    
+    //isAdjacentNeighbor(move)
  
     /**
      * Algorithm to determine the move to play, individually different for each turn
