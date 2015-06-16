@@ -210,6 +210,25 @@ public abstract class AbstractEngine
         return result;
     }
     
+    public boolean onStraightWith(String move1, String move2)
+    {
+        boolean result = false;
+        String num1 = move1.substring(1, 3);
+        String num2 = move2.substring(1, 3);
+        String let1 = move1.substring(0, 1);
+        String let2 = move2.substring(0, 1);
+        
+        if(isHorizontal(move1) && isHorizontal(move2))
+        {
+            if(num1.equals(num2)) result = true;
+        }
+        else if(isVertical(move1) && isVertical(move2))
+        {
+            if(let1.equals(let2)) result = true;
+        }
+        return result;
+    }
+    
     //isAdjacentNeighbor(move)
  
     /**
