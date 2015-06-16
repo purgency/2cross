@@ -50,7 +50,7 @@ public class Move2Engine extends AbstractEngine
             {
                 for(String move : _centerspoke)
                 {
-                    if(unplayed.contains(move))
+                    if(unplayed.contains(move) && !isParallelNeighbor(move, played.get(0)))
                     {
                         consider.add(move);
                     }

@@ -137,7 +137,7 @@ public abstract class AbstractEngine
         
         for (int i=0;i<position.length();i+=3)
         {
-            position.substring(i, i+3);
+            played.add(position.substring(i, i+3));
         }
         return played;
     }
@@ -184,8 +184,9 @@ public abstract class AbstractEngine
         boolean result = false;
         int num = Integer.parseInt(of.substring(1, 3));
         String let = of.substring(0, 1);
-        String numP2 = Integer.toString(num + 2);
-        String numM2 = Integer.toString(num - 2);
+        String numS = start.convert(Integer.toString(num));
+        String numP2 = start.convert(Integer.toString(num + 2));
+        String numM2 = start.convert(Integer.toString(num - 2));
         String letP2 = null;
         String letM2 = null;
         
@@ -204,7 +205,7 @@ public abstract class AbstractEngine
                     if(!let.equals("b") && !let.equals("a")) letM2 = abc[i-2];
                 }
             }
-            if(Neighbor.equals(letP2 + num) || Neighbor.equals(letM2 + num)) result = true;
+            if(Neighbor.equals(letP2 + numS) || Neighbor.equals(letM2 + numS)) result = true;
         }
         return result;
     }
