@@ -176,6 +176,10 @@ public abstract class AbstractEngine
     //isLoony()
     
     //isSacrifice()
+    
+    //numQuads()
+    
+    //getInnerParallelNeigbor
  
     public abstract String chooseMove(String position);
 }

@@ -22,6 +22,36 @@ public class Move2Engine extends AbstractEngine
             else if(position.equals("e06")) consider.addAll(new HashSet<String>(Arrays.asList("i06", "h09", "h03")));
             else consider.addAll(new HashSet<String>(Arrays.asList("c06", "d09", "d03")));
         }
+        else
+        {
+            consider.addAll(_thirdrow);
+            
+            Set<String> removal = new HashSet<String>();
+            for(String move : consider)
+            {
+                if(!unplayed.contains(move))
+                {
+                    removal.add(move);
+                }
+                else if(numTop==1 && atTop(move))
+                {
+                    removal.add(move);
+                }
+                else if(numBottom==1 && atBottom(move))
+                {
+                    removal.add(move);
+                }
+                else if(numLeft==1 && atLeft(move))
+                {
+                    removal.add(move);
+                }
+                else if(numRight==1 && atRight(move))
+                {
+                    removal.add(move);
+                }
+            }
+            consider.removeAll(removal);
+        }
         
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision
         return consider.get(0);

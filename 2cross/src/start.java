@@ -2,29 +2,20 @@ import java.util.*;
 
 public class start
 {
-    private static int _turn = 1;
-    
-    
     public static void main(String[] args)
     {
-        String result = play(convert("g6"));
+        String LINE = "f3";
+        String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
     }
     
-    public static String play(String game)
+    public static String play(String game, int turn)
     {
-        for (int i=0;i<game.length();i+=3)
-        {
-            if(new HashSet<String>(Arrays.asList("a","b","c","d", "e", "f", "g", "h", "i", "j", "k")).contains(Character.toString(game.charAt(i))))
-            {
-                _turn++;
-            }
-        }
         String position = game;
         AbstractEngine engine;
         
-        switch(_turn)
+        switch(turn)
         {
             case 1: engine = new Move1Engine();
                 break;
@@ -73,4 +64,157 @@ public class start
         return line;
     }
     
+    public static int getturn(String position)
+    {
+        String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6", "d4",
+                "d2", "f10", "f8", "f6", "f4", "f2", "h10", "h8", "h6", "h4", "h2",
+                "j10", "j8", "j6", "j4", "j2"};
+        Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+        
+        for (int i = 0; i < _boxes.length; i++)
+        {
+            _boxmap.put(_boxes[i], 0);
+        }
+        
+        int turn = 1;
+        String line = position;
+
+        for (int i = 0; i < line.length(); i += 3)
+        {
+            Boolean completedBox = false;
+            String move = line.substring(i, i + 3);
+            char let = move.charAt(0);
+            int num = Integer.parseInt(move.substring(1, 3));
+            if (num % 2 == 0) //vertical line
+            {
+                if (let != 'a')
+                {
+                    String boxL = "";
+                    switch (let)
+                    {
+                    case 'c':
+                        boxL = "b" + Integer.toString(num);
+                        break;
+                    case 'e':
+                        boxL = "d" + Integer.toString(num);
+                        break;
+                    case 'g':
+                        boxL = "f" + Integer.toString(num);
+                        break;
+                    case 'i':
+                        boxL = "h" + Integer.toString(num);
+                        break;
+                    case 'k':
+                        boxL = "j" + Integer.toString(num);
+                        break;
+
+                    }
+                    _boxmap.put(boxL, _boxmap.get(boxL) + 1);
+                    if (_boxmap.get(boxL) == 4)
+                    {
+                        completedBox = true;
+                    }
+                }
+                if (let != 'k')
+                {
+                    String boxR = "";
+                    switch (let)
+                    {
+                    case 'a':
+                        boxR = "b" + Integer.toString(num);
+                        break;
+                    case 'c':
+                        boxR = "d" + Integer.toString(num);
+                        break;
+                    case 'e':
+                        boxR = "f" + Integer.toString(num);
+                        break;
+                    case 'g':
+                        boxR = "h" + Integer.toString(num);
+                        break;
+                    case 'i':
+                        boxR = "j" + Integer.toString(num);
+                        break;
+
+                    }
+                    _boxmap.put(boxR, _boxmap.get(boxR) + 1);
+                    if (_boxmap.get(boxR) == 4)
+                    {
+                        completedBox = true;
+                        if (turn % 2 == 0)
+                        {
+                            _boxmap.put(boxR, 10);
+                        }
+                        else
+                        {
+                            _boxmap.put(boxR, 20);
+                        }
+                    }
+                }
+            }
+            else
+            //horizontal line
+            {
+                if (num != 11)
+                {
+                    String boxO = "";
+                    switch (num)
+                    {
+                    case 1:
+                        boxO = let + Integer.toString(num + 1);
+                        break;
+                    case 3:
+                        boxO = let + Integer.toString(num + 1);
+                        break;
+                    case 5:
+                        boxO = let + Integer.toString(num + 1);
+                        break;
+                    case 7:
+                        boxO = let + Integer.toString(num + 1);
+                        break;
+                    case 9:
+                        boxO = let + Integer.toString(num + 1);
+                        break;
+
+                    }
+                    _boxmap.put(boxO, _boxmap.get(boxO) + 1);
+                    if (_boxmap.get(boxO) == 4)
+                    {
+                        completedBox = true;
+                    }
+                }
+                if (num != 01)
+                {
+                    String boxU = "";
+                    switch (num)
+                    {
+                    case 3:
+                        boxU = let + Integer.toString(num - 1);
+                        break;
+                    case 5:
+                        boxU = let + Integer.toString(num - 1);
+                        break;
+                    case 7:
+                        boxU = let + Integer.toString(num - 1);
+                        break;
+                    case 9:
+                        boxU = let + Integer.toString(num - 1);
+                        break;
+                    case 11:
+                        boxU = let + Integer.toString(num - 1);
+                        break;
+
+                    }
+                    _boxmap.put(boxU, _boxmap.get(boxU) + 1);
+                    if (_boxmap.get(boxU) == 4)
+                    {
+                        completedBox = true;
+                    }
+                }
+            }
+            if (!completedBox) turn++;
+        }
+        return turn;
+    
+    }
 }
