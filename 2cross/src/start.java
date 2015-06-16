@@ -7,7 +7,7 @@ public class start
     
     public static void main(String[] args)
     {
-        String result = play(convert(""));
+        String result = play(convert("g6"));
         System.out.println(result);
 
     }

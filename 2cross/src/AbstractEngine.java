@@ -122,7 +122,7 @@ public abstract class AbstractEngine
     public void setNums(String position)
     {
         String substring;
-        for(int i=0;position.length()>0;i+=3)
+        for(int i=0;position.length()>i;i+=3)
         {
             substring = position.substring(i, i+3);
             if(isEdge(substring))
