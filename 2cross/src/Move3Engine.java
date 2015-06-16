@@ -20,7 +20,7 @@ public class Move3Engine extends AbstractEngine
     public String chooseMove(String position)
     {
         Set<String> unplayed = unplayed(position);
-        Set<String> played = played(position);
+        ArrayList<String> played = played(position);
         
         List<String> consider = new ArrayList<String>();
         

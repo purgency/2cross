@@ -12,7 +12,7 @@ public class start
     
     public static void main(String[] args)
     {
-        String LINE = "http://www.trmph.com/dnb/board#5,b11d9g6c10b9a10c6e8e6d5c8f9h7d7g8g4e4f3f5f7e2g2h3h1j1j3i2j5k2c2f1b3b5g10h11j11k10k8j7k6i6i4h5a2b1k4b7a8a6e10d11f11i10h9c4i8d1d3j9a4";
+        String LINE = "h7";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 

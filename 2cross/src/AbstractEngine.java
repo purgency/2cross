@@ -118,21 +118,26 @@ public abstract class AbstractEngine
         {
             if(!(position.contains(line))) unplayed.add(line);
         }
+        if(unplayed.contains("a02") && unplayed.contains("b01")) unplayed.remove("b01");
+        if(unplayed.contains("a10") && unplayed.contains("b11")) unplayed.remove("b11");
+        if(unplayed.contains("k10") && unplayed.contains("j11")) unplayed.remove("j11");
+        if(unplayed.contains("k02") && unplayed.contains("j01")) unplayed.remove("j01");
+        
         return unplayed;
     }
     
     /**
-     * returns set of played line
+     * returns an ArrayList containing the played lines
      * @param position the position
      * @return the set
      */
-    public HashSet<String> played(String position)
+    public ArrayList<String> played(String position)
     {
-        HashSet<String> played = new HashSet<String>();
+        ArrayList<String> played = new ArrayList<String>();
         
-        for (String line : _all)
+        for (int i=0;i<position.length();i+=3)
         {
-            if(position.contains(line)) played.add(line);
+            position.substring(i, i+3);
         }
         return played;
     }
@@ -172,7 +177,7 @@ public abstract class AbstractEngine
     
     //numQuads()
     
-    //getInnerParallelNeighbor
+    //isParallelNeighbor
     
     //getAdjacentNeighbor
  

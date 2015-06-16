@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.*;
 
 public class Move6Engine extends AbstractEngine
 {
@@ -16,7 +13,7 @@ public class Move6Engine extends AbstractEngine
     public String chooseMove(String position)
     {
         Set<String> unplayed = unplayed(position);
-        Set<String> played = played(position);
+        ArrayList<String> played = played(position);
         
         return null;
     }

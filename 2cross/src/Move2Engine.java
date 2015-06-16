@@ -22,7 +22,7 @@ public class Move2Engine extends AbstractEngine
     {
         setNums(position);
         Set<String> unplayed = unplayed(position);
-        Set<String> played = played(position);
+        ArrayList<String> played = played(position);
         
         List<String> consider = new ArrayList<String>();
         
@@ -45,6 +45,16 @@ public class Move2Engine extends AbstractEngine
                 else if(_numBottom==1 && atBottom(move)) removal.add(move);
                 else if(_numLeft==1 && atLeft(move)) removal.add(move);
                 else if(_numRight==1 && atRight(move)) removal.add(move);
+            }
+            if(_numCenterspoke==1)
+            {
+                for(String move : _centerspoke)
+                {
+                    if(unplayed.contains(move))
+                    {
+                        consider.add(move);
+                    }
+                }
             }
             consider.removeAll(removal);
         }
