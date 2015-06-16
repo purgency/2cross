@@ -12,7 +12,7 @@ public class start
     
     public static void main(String[] args)
     {
-        String LINE = "h7";
+        String LINE = "f5j3";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -65,6 +65,7 @@ public class start
         line = line.replace("https://", "");
         line = line.replace("www.", "");
         line = line.replace("trmph.com/dnb/board#5,", "");
+        line = line.replace("0", "00");
         line = line.replace("2", "02");
         line = line.replace("3", "03");
         line = line.replace("4", "04");
@@ -79,6 +80,7 @@ public class start
         line = line.replace("h1", "h01");
         line = line.replace("j1", "j01");
         line = line.replace("011", "11");
+        line = line.replace("000", "0");
         
         return line;
     }

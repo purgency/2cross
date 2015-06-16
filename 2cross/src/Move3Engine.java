@@ -21,6 +21,7 @@ public class Move3Engine extends AbstractEngine
     {
         Set<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
+        String second = played.get(1);
         
         List<String> consider = new ArrayList<String>();
         
@@ -29,7 +30,26 @@ public class Move3Engine extends AbstractEngine
         for(String move : consider)
         {
             if(!unplayed.contains(move)) removal.add(move);
-            if(_meridian.contains(move) || _equator.contains(move)) removal.add(move);
+            
+            boolean oneBoxDistant = false;
+            
+            Set<String> oBD1 = oneBoxDistance(move);
+            Set<String> BoW2 = getBoxesOfWall(second);
+            for (String box : oBD1)
+            {
+                if(!oneBoxDistant)
+                {   
+                    for (String boxS : BoW2)
+                    {
+                        if(boxS.equals(box)) oneBoxDistant = true;
+                    }
+                }
+            }
+            if((!oneBoxDistant || isParallelNeighbor(move, second)) && removal.size()<11) removal.add(move);
+        }
+        for(String move : consider)
+        {
+            if((_meridian.contains(move) || _equator.contains(move)) && removal.size()<11) removal.add(move);
         }
         consider.removeAll(removal);
         

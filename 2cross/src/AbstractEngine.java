@@ -177,8 +177,93 @@ public abstract class AbstractEngine
     
     //numQuads()
     
-    //wallOfBox(move, box)
+    public HashSet<String> getBoxesOfWall(String move)
+    {
+        HashSet<String> boxesofwall = new HashSet<String>();
+        String box1;
+        String box2;
+        
+        int num = Integer.parseInt(move.substring(1, 3));
+        String let = move.substring(0, 1);
+        String numS = start.convert(Integer.toString(num));
+        String numP1 = start.convert(Integer.toString(num + 1));
+        String numM1 = start.convert(Integer.toString(num - 1));
+        String letP1 = null;
+        String letM1 = null;
+        
+        if(isHorizontal(move))
+        {
+            box1 = let + numP1;
+            box2 = let + numM1;
+        }
+        else
+        {
+            String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"};
+            for(int i=0;i<abc.length;i++)
+            {
+                if(let.equals(abc[i]))
+                {
+                    if(!let.equals("k")) letP1 = abc[i+1];
+                    if(!let.equals("a")) letM1 = abc[i-1];
+                }
+            }
+            
+            box1 = letP1 + numS;
+            box2 = letM1 + numS;
+        }
+        boxesofwall.add(box1);
+        boxesofwall.add(box2);
+        
+        return boxesofwall;
+    }
     
+    public HashSet<String> oneBoxDistance(String move)
+    {
+        HashSet<String> oneBoxDistance = new HashSet<String>();
+        
+        HashSet<String> boxesofwall = getBoxesOfWall(move);
+        
+        for (String box : boxesofwall)
+        {
+            if(box != null && !box.contains("null"))
+            {
+                int num = Integer.parseInt(box.substring(1, 3));
+                String let = box.substring(0, 1);
+                String numS = start.convert(Integer.toString(num));
+                String numP2 = start.convert(Integer.toString(num + 2));
+                String numM2 = start.convert(Integer.toString(num - 2));
+                String letP2 = null;
+                String letM2 = null;
+                
+                String boxN[] = new String[4];
+                
+                boxN[0] = let + numP2;
+                boxN[1] = let + numM2;
+                
+                String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k"};
+                for(int i=0;i<abc.length;i++)
+                {
+                    if(let.equals(abc[i]))
+                    {
+                        if(!let.equals("j")) letP2 = abc[i+2];
+                        if(!let.equals("b")) letM2 = abc[i-2];
+                    }
+                }
+                
+                boxN[2] = letP2 + numS;
+                boxN[3] = letM2 + numS;
+                
+                for(int i=0;i<4;i++)
+                {
+                    if(boxN[i] != null && !boxN[i].contains("null")) oneBoxDistance.add(boxN[i]);
+                }
+            }
+        }
+        
+        return oneBoxDistance;
+    }
+    
+     
     public boolean isParallelNeighbor(String Neighbor, String of)
     {
         boolean result = false;
