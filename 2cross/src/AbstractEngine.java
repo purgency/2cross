@@ -217,9 +217,9 @@ public abstract class AbstractEngine
         return boxesofwall;
     }
     
-    public HashSet<String> oneBoxDistance(String move)
+    public HashSet<String> boxDistance(String move)
     {
-        HashSet<String> oneBoxDistance = new HashSet<String>();
+        HashSet<String> boxDistance = new HashSet<String>();
         
         HashSet<String> boxesofwall = getBoxesOfWall(move);
         
@@ -234,8 +234,12 @@ public abstract class AbstractEngine
                 String numM2 = start.convert(Integer.toString(num - 2));
                 String letP2 = null;
                 String letM2 = null;
+                String numP4 = start.convert(Integer.toString(num + 4));
+                String numM4 = start.convert(Integer.toString(num - 4));
+                String letP4 = null;
+                String letM4 = null;
                 
-                String boxN[] = new String[4];
+                String boxN[] = new String[6];
                 
                 boxN[0] = let + numP2;
                 boxN[1] = let + numM2;
@@ -253,14 +257,33 @@ public abstract class AbstractEngine
                 boxN[2] = letP2 + numS;
                 boxN[3] = letM2 + numS;
                 
-                for(int i=0;i<4;i++)
+                if(isHorizontal(move) && (onEquator(move) || onMeridian(move)))
                 {
-                    if(boxN[i] != null && !boxN[i].contains("null")) oneBoxDistance.add(boxN[i]);
+                    for(int i=0;i<abc.length;i++)
+                    {
+                        if(let.equals(abc[i]))
+                        {
+                            if(!let.equals("j") && !let.equals("h")) letP4 = abc[i+4];
+                            if(!let.equals("b") && !let.equals("d")) letM4 = abc[i-4];
+                        }
+                    }
+                    boxN[4] = letP4 + numS;
+                    boxN[5] = letM4 + numS;
+                }
+                else if(onEquator(move) || onMeridian(move))
+                {
+                    boxN[4] = let + numP4;
+                    boxN[5] = let + numM4;
+                }
+                
+                for(int i=0;i<6;i++)
+                {
+                    if(boxN[i] != null && !boxN[i].contains("null")) boxDistance.add(boxN[i]);
                 }
             }
         }
         
-        return oneBoxDistance;
+        return boxDistance;
     }
     
      
@@ -315,7 +338,7 @@ public abstract class AbstractEngine
     }
     
     //isAdjacentNeighbor(move)
- 
+
     /**
      * Algorithm to determine the move to play, individually different for each turn
      * @param position the position

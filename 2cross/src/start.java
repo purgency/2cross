@@ -12,7 +12,7 @@ public class start
     
     public static void main(String[] args)
     {
-        String LINE = "f5j3";
+        String LINE = "f5f9";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -180,25 +180,7 @@ public class start
                 if (num != 11)
                 {
                     String boxO = "";
-//                    switch (num)
-//                    {
-//                    case 1:
                         boxO = let + Integer.toString(num + 1);
-//                        break;
-//                    case 3:
-//                        boxO = let + Integer.toString(num + 1);
-//                        break;
-//                    case 5:
-//                        boxO = let + Integer.toString(num + 1);
-//                        break;
-//                    case 7:
-//                        boxO = let + Integer.toString(num + 1);
-//                        break;
-//                    case 9:
-//                        boxO = let + Integer.toString(num + 1);
-//                        break;
-//
-//                   }
                     _valuemap.put(boxO, _valuemap.get(boxO) + 1);
                     if (_valuemap.get(boxO) == 4)
                     {
@@ -208,25 +190,8 @@ public class start
                 if (num != 01)
                 {
                     String boxU = "";
-//                    switch (num)
-//                    {
-//                    case 3:
                           boxU = let + Integer.toString(num - 1);
-//                        break;
-//                    case 5:
-//                        boxU = let + Integer.toString(num - 1);
-//                        break;
-//                    case 7:
-//                        boxU = let + Integer.toString(num - 1);
-//                        break;
-//                    case 9:
-//                        boxU = let + Integer.toString(num - 1);
-//                        break;
-//                    case 11:
-//                        boxU = let + Integer.toString(num - 1);
-//                        break;
-//
-//                    }
+                          
                     _valuemap.put(boxU, _valuemap.get(boxU) + 1);
                     if (_valuemap.get(boxU) == 4)
                     {
