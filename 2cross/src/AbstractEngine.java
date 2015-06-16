@@ -193,7 +193,9 @@ public abstract class AbstractEngine
     
     //numQuads()
     
-    //getInnerParallelNeigbor
+    //getInnerParallelNeighbor
+    
+    //
  
     public abstract String chooseMove(String position);
 }

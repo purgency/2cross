@@ -1,12 +1,21 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
 public class Move3Engine extends AbstractEngine
 {
+    Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    
+    public Move3Engine(Map<String, Integer> boxmap)
+    {
+        _boxmap = boxmap;
+    }
+    
     public String chooseMove(String position)
     {
         Set<String> unplayed = unplayed(position);

@@ -1,13 +1,22 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
 public class Move2Engine extends AbstractEngine
 {
+    Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    
+    public Move2Engine(Map<String, Integer> boxmap)
+    {
+        _boxmap = boxmap;
+    }
+    
     public String chooseMove(String position)
     {
         setNums(position);

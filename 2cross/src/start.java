@@ -1,7 +1,15 @@
 import java.util.*;
 
+/**
+ * Doublecross is a knowledge-based AI for the Dots and Boxes game
+ * @author Philipp Quach
+ *
+ */
+
 public class start
 {
+    static Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    
     public static void main(String[] args)
     {
         String LINE = "f1h9";
@@ -19,19 +27,19 @@ public class start
         {
             case 1: engine = new Move1Engine();
                 break;
-            case 2: engine = new Move2Engine();
+            case 2: engine = new Move2Engine(_boxmap);
                 break;
-            case 3: engine = new Move3Engine();
+            case 3: engine = new Move3Engine(_boxmap);
                 break;
-            case 4: engine = new Move4Engine();
+            case 4: engine = new Move4Engine(_boxmap);
                 break;
-            case 5: engine = new Move5Engine();
+            case 5: engine = new Move5Engine(_boxmap);
                 break;
-            case 6: engine = new Move6Engine();
+            case 6: engine = new Move6Engine(_boxmap);
                 break;
-            case 7: engine = new Move7Engine();
+            case 7: engine = new Move7Engine(_boxmap);
                 break;
-            default: engine = new EndgameEngine();
+            default: engine = new EndgameEngine(_boxmap);
                 break;
         }
         
@@ -69,7 +77,7 @@ public class start
         String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6", "d4",
                 "d2", "f10", "f8", "f6", "f4", "f2", "h10", "h8", "h6", "h4", "h2",
                 "j10", "j8", "j6", "j4", "j2"};
-        Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+        
         
         for (int i = 0; i < _boxes.length; i++)
         {
@@ -158,25 +166,25 @@ public class start
                 if (num != 11)
                 {
                     String boxO = "";
-                    switch (num)
-                    {
-                    case 1:
+//                    switch (num)
+//                    {
+//                    case 1:
                         boxO = let + Integer.toString(num + 1);
-                        break;
-                    case 3:
-                        boxO = let + Integer.toString(num + 1);
-                        break;
-                    case 5:
-                        boxO = let + Integer.toString(num + 1);
-                        break;
-                    case 7:
-                        boxO = let + Integer.toString(num + 1);
-                        break;
-                    case 9:
-                        boxO = let + Integer.toString(num + 1);
-                        break;
-
-                    }
+//                        break;
+//                    case 3:
+//                        boxO = let + Integer.toString(num + 1);
+//                        break;
+//                    case 5:
+//                        boxO = let + Integer.toString(num + 1);
+//                        break;
+//                    case 7:
+//                        boxO = let + Integer.toString(num + 1);
+//                        break;
+//                    case 9:
+//                        boxO = let + Integer.toString(num + 1);
+//                        break;
+//
+//                   }
                     _boxmap.put(boxO, _boxmap.get(boxO) + 1);
                     if (_boxmap.get(boxO) == 4)
                     {
@@ -186,25 +194,25 @@ public class start
                 if (num != 01)
                 {
                     String boxU = "";
-                    switch (num)
-                    {
-                    case 3:
-                        boxU = let + Integer.toString(num - 1);
-                        break;
-                    case 5:
-                        boxU = let + Integer.toString(num - 1);
-                        break;
-                    case 7:
-                        boxU = let + Integer.toString(num - 1);
-                        break;
-                    case 9:
-                        boxU = let + Integer.toString(num - 1);
-                        break;
-                    case 11:
-                        boxU = let + Integer.toString(num - 1);
-                        break;
-
-                    }
+//                    switch (num)
+//                    {
+//                    case 3:
+                          boxU = let + Integer.toString(num - 1);
+//                        break;
+//                    case 5:
+//                        boxU = let + Integer.toString(num - 1);
+//                        break;
+//                    case 7:
+//                        boxU = let + Integer.toString(num - 1);
+//                        break;
+//                    case 9:
+//                        boxU = let + Integer.toString(num - 1);
+//                        break;
+//                    case 11:
+//                        boxU = let + Integer.toString(num - 1);
+//                        break;
+//
+//                    }
                     _boxmap.put(boxU, _boxmap.get(boxU) + 1);
                     if (_boxmap.get(boxU) == 4)
                     {
