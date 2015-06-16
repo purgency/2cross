@@ -19,16 +19,16 @@ public abstract class AbstractEngine
     public static final Set<String> _edge = new HashSet<String>(Arrays.asList("a04", "a06", "a08", "d11", "f11", "h11", "k08", "k06", "k04", "h01", "f01", "d01"));
     public static final Set<String> _corner = new HashSet<String>(Arrays.asList("a10", "b11", "j11", "k10", "a02", "b01", "j01", "k02"));
    
-    public int numEdge = 0;
-    public int numCenter = 0;
-    public int numHorizontal = 0;
-    public int numVertical = 0;
-    public int numTop = 0;
-    public int numBottom = 0;
-    public int numLeft = 0;
-    public int numRight = 0;
-    public int numThirdRow = 0;
-    public int numCenterspoke = 0;
+    public int _numEdge = 0;
+    public int _numCenter = 0;
+    public int _numHorizontal = 0;
+    public int _numVertical = 0;
+    public int _numTop = 0;
+    public int _numBottom = 0;
+    public int _numLeft = 0;
+    public int _numRight = 0;
+    public int _numThirdRow = 0;
+    public int _numCenterspoke = 0;
     
     public boolean isHorizontal(String move)
     {
@@ -111,10 +111,7 @@ public abstract class AbstractEngine
         
         for (String line : _all)
         {
-            if(!(position.contains(line)))
-            {
-                unplayed.add(line);
-            }
+            if(!(position.contains(line))) unplayed.add(line);
         }
         return unplayed;
     }
@@ -125,10 +122,7 @@ public abstract class AbstractEngine
         
         for (String line : _all)
         {
-            if(position.contains(line))
-            {
-                played.add(line);
-            }
+            if(position.contains(line)) played.add(line);
         }
         return played;
     }
@@ -139,46 +133,17 @@ public abstract class AbstractEngine
         for(int i=0;position.length()>i;i+=3)
         {
             substring = position.substring(i, i+3);
-            if(isEdge(substring))
-            {
-                numEdge++;
-            }
-            if(inCenter(substring))   
-            {
-                numCenter++;
-            }
-            if(isHorizontal(substring))
-            {
-                numHorizontal++;
-            }
-            if(isVertical(substring))
-            {
-                numVertical++;
-            }
-            if(atTop(substring))
-            {
-                numTop++;
-            }
-            if(atBottom(substring))
-            {
-                numBottom++;
-            }
-            if(atLeft(substring))
-            {
-                numLeft++;
-            }
-            if(atRight(substring))
-            {
-                numRight++;
-            }
-            if(onThirdrow(substring))
-            {
-                numThirdRow++;
-            }
-            if(isCenterspoke(substring))
-            {
-                numCenterspoke++;
-            }
+            
+            if(isEdge(substring)) _numEdge++;
+            if(inCenter(substring)) _numCenter++;
+            if(isHorizontal(substring)) _numHorizontal++;
+            if(isVertical(substring)) _numVertical++;
+            if(atTop(substring)) _numTop++;
+            if(atBottom(substring)) _numBottom++;
+            if(atLeft(substring)) _numLeft++;
+            if(atRight(substring)) _numRight++;
+            if(onThirdrow(substring)) _numThirdRow++;
+            if(isCenterspoke(substring)) _numCenterspoke++;
 
         }
     }

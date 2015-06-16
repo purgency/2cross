@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class Move7Engine extends AbstractEngine
 {
-    Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
     
-    public Move7Engine(Map<String, Integer> boxmap)
+    public Move7Engine(Map<String, Integer> valuemap)
     {
-        _boxmap = boxmap;
+        _valuemap = valuemap;
     }
     
     public String chooseMove(String position)

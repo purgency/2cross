@@ -8,11 +8,11 @@ import java.util.*;
 
 public class start
 {
-    static Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    static Map<String, Integer> _valuemap = new HashMap<String, Integer>();
     
     public static void main(String[] args)
     {
-        String LINE = "f1h9";
+        String LINE = "http://www.trmph.com/dnb/board#5,b11d9g6c10b9a10c6e8e6d5c8f9h7d7g8g4e4f3f5f7e2g2h3h1j1j3i2j5k2c2f1b3b5g10h11j11k10k8j7k6i6i4h5a2b1k4b7a8a6e10d11f11i10h9c4i8d1d3j9a4";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -27,19 +27,19 @@ public class start
         {
             case 1: engine = new Move1Engine();
                 break;
-            case 2: engine = new Move2Engine(_boxmap);
+            case 2: engine = new Move2Engine(_valuemap);
                 break;
-            case 3: engine = new Move3Engine(_boxmap);
+            case 3: engine = new Move3Engine(_valuemap);
                 break;
-            case 4: engine = new Move4Engine(_boxmap);
+            case 4: engine = new Move4Engine(_valuemap);
                 break;
-            case 5: engine = new Move5Engine(_boxmap);
+            case 5: engine = new Move5Engine(_valuemap);
                 break;
-            case 6: engine = new Move6Engine(_boxmap);
+            case 6: engine = new Move6Engine(_valuemap);
                 break;
-            case 7: engine = new Move7Engine(_boxmap);
+            case 7: engine = new Move7Engine(_valuemap);
                 break;
-            default: engine = new EndgameEngine(_boxmap);
+            default: engine = new EndgameEngine(_valuemap);
                 break;
         }
         
@@ -81,15 +81,17 @@ public class start
         
         for (int i = 0; i < _boxes.length; i++)
         {
-            _boxmap.put(_boxes[i], 0);
+            _valuemap.put(_boxes[i], 0);
         }
+        _valuemap.put("scorep1", 0);
+        _valuemap.put("scorep2", 0);
         
         int turn = 1;
         String line = position;
 
         for (int i = 0; i < line.length(); i += 3)
         {
-            Boolean completedBox = false;
+            int completedBox = 0;
             String move = line.substring(i, i + 3);
             char let = move.charAt(0);
             int num = Integer.parseInt(move.substring(1, 3));
@@ -117,10 +119,11 @@ public class start
                         break;
 
                     }
-                    _boxmap.put(boxL, _boxmap.get(boxL) + 1);
-                    if (_boxmap.get(boxL) == 4)
+                    _valuemap.put(boxL, _valuemap.get(boxL) + 1);
+                    if (_valuemap.get(boxL) == 4)
                     {
-                        completedBox = true;
+                        completedBox += 1;
+                        
                     }
                 }
                 if (let != 'k')
@@ -145,18 +148,10 @@ public class start
                         break;
 
                     }
-                    _boxmap.put(boxR, _boxmap.get(boxR) + 1);
-                    if (_boxmap.get(boxR) == 4)
+                    _valuemap.put(boxR, _valuemap.get(boxR) + 1);
+                    if (_valuemap.get(boxR) == 4)
                     {
-                        completedBox = true;
-                        if (turn % 2 == 0)
-                        {
-                            _boxmap.put(boxR, 10);
-                        }
-                        else
-                        {
-                            _boxmap.put(boxR, 20);
-                        }
+                        completedBox += 1;
                     }
                 }
             }
@@ -185,10 +180,10 @@ public class start
 //                        break;
 //
 //                   }
-                    _boxmap.put(boxO, _boxmap.get(boxO) + 1);
-                    if (_boxmap.get(boxO) == 4)
+                    _valuemap.put(boxO, _valuemap.get(boxO) + 1);
+                    if (_valuemap.get(boxO) == 4)
                     {
-                        completedBox = true;
+                        completedBox += 1;
                     }
                 }
                 if (num != 01)
@@ -213,14 +208,23 @@ public class start
 //                        break;
 //
 //                    }
-                    _boxmap.put(boxU, _boxmap.get(boxU) + 1);
-                    if (_boxmap.get(boxU) == 4)
+                    _valuemap.put(boxU, _valuemap.get(boxU) + 1);
+                    if (_valuemap.get(boxU) == 4)
                     {
-                        completedBox = true;
+                        completedBox += 1;
                     }
                 }
             }
-            if (!completedBox) turn++;
+
+            if((turn+1)%2==0 && completedBox>0)
+            {
+                _valuemap.put("scorep1", ( _valuemap.get("scorep1")+completedBox));
+            }
+            else if (completedBox>0)
+            {
+                _valuemap.put("scorep2", ( _valuemap.get("scorep2")+completedBox));
+            }
+            if (completedBox==0) turn++;
         }
         return turn;
     

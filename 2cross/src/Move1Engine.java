@@ -8,10 +8,7 @@ public class Move1Engine extends AbstractEngine
         
         for (String line : _all)
         {
-            if(inCenter(line) || isEdge(line))
-            {
-                consider.add(line);
-            }
+            if(inCenter(line) || isEdge(line)) consider.add(line);
         }
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision
         return consider.get(0);

@@ -25,7 +25,7 @@ public class Move2Engine extends AbstractEngine
         
         List<String> consider = new ArrayList<String>();
         
-        if(numCenter==1)
+        if(_numCenter==1)
         {
             if(position.equals("f05")) consider.addAll(new HashSet<String>(Arrays.asList("f09", "c08", "i08")));
             else if(position.equals("f07")) consider.addAll(new HashSet<String>(Arrays.asList("f03", "c04", "i04")));
@@ -39,26 +39,11 @@ public class Move2Engine extends AbstractEngine
             Set<String> removal = new HashSet<String>();
             for(String move : consider)
             {
-                if(played.contains(move))
-                {
-                    removal.add(move);
-                }
-                else if(numTop==1 && atTop(move))
-                {
-                    removal.add(move);
-                }
-                else if(numBottom==1 && atBottom(move))
-                {
-                    removal.add(move);
-                }
-                else if(numLeft==1 && atLeft(move))
-                {
-                    removal.add(move);
-                }
-                else if(numRight==1 && atRight(move))
-                {
-                    removal.add(move);
-                }
+                if(played.contains(move)) removal.add(move);
+                else if(_numTop==1 && atTop(move)) removal.add(move);
+                else if(_numBottom==1 && atBottom(move)) removal.add(move);
+                else if(_numLeft==1 && atLeft(move)) removal.add(move);
+                else if(_numRight==1 && atRight(move)) removal.add(move);
             }
             consider.removeAll(removal);
         }

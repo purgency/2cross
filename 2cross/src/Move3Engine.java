@@ -9,11 +9,11 @@ import java.util.Set;
 
 public class Move3Engine extends AbstractEngine
 {
-    Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
     
-    public Move3Engine(Map<String, Integer> boxmap)
+    public Move3Engine(Map<String, Integer> valuemap)
     {
-        _boxmap = boxmap;
+        _valuemap = valuemap;
     }
     
     public String chooseMove(String position)
@@ -27,14 +27,8 @@ public class Move3Engine extends AbstractEngine
         Set<String> removal = new HashSet<String>();
         for(String move : consider)
         {
-            if(!unplayed.contains(move))
-            {
-                removal.add(move);
-            }
-            if(_meridian.contains(move) || _equator.contains(move))
-            {
-                removal.add(move);
-            }
+            if(!unplayed.contains(move)) removal.add(move);
+            if(_meridian.contains(move) || _equator.contains(move)) removal.add(move);
         }
         consider.removeAll(removal);
         

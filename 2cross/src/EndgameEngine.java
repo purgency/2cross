@@ -5,11 +5,11 @@ import java.util.Set;
 
 public class EndgameEngine extends AbstractEngine
 {
-    Map<String, Integer> _boxmap = new HashMap<String, Integer>();
+    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
     
-    public EndgameEngine(Map<String, Integer> boxmap)
+    public EndgameEngine(Map<String, Integer> valuemap)
     {
-        _boxmap = boxmap;
+        _valuemap = valuemap;
     }
     
     public String chooseMove(String position)
