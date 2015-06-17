@@ -19,6 +19,9 @@ public class Move4Engine extends AbstractEngine
         List<String> consider = new ArrayList<String>();
         Set<String> removal = new HashSet<String>();
 
+        String third = played.get(2);
+        String second = played.get(1);
+
         if (_numCenterspoke >= 2)
         {
             consider.addAll(_centerspoke);
@@ -36,44 +39,86 @@ public class Move4Engine extends AbstractEngine
         }
         else
         {
-            for (String move : unplayed)
+            //TODO: consider outerspokes if isEdge(third) && boxDistance second <-> third
+            Set<String> oBD1 = boxDistance(third);
+            Set<String> BoWsecond = getBoxesOfWall(second);
+            
+            boolean close = false;
+            for (String box : oBD1)
             {
-                for (String already : played)
+                if (!close)
                 {
-                    if (onThirdrow(already) && onThirdrow(move))
+                    for (String boxS : BoWsecond)
                     {
-                        if ((onMeridian(move) || onEquator(move))
-                                && onStraightWith(move, already))
+                        if (boxS.equals(box)) close = true;
+                    }
+                }
+            }
+            
+            if(isEdge(third) && close)
+            {
+                Set<String> BoWthird = getBoxesOfWall(third);
+                
+                for (String spoke : _outerspoke)
+                {
+                    Set<String> BoWspoke = getBoxesOfWall(spoke);
+                    for (String boxA : BoWthird)
+                    {
+                        for (String boxB : BoWspoke)
                         {
-                            consider.add(move);
+                            if (boxA.equals(boxB))
+                                consider.add(spoke);
                         }
-                        else if (!(onMeridian(move) || onEquator(move)))
+                    }
+                }
+            }
+            else
+            {
+                for (String move : unplayed)
+                {
+                    for (String already : played)
+                    {
+                        if (onThirdrow(already) && onThirdrow(move))
                         {
-                            if (onStraightWith(move, already))
+                            if (!(isParallelNeighbor(move, third) && isEdge(third)))
                             {
-                                consider.add(move);
-                            }
-                            else
-                            {
-                                Set<String> BoW1 = getBoxesOfWall(move);
-                                Set<String> BoW2 = getBoxesOfWall(already);
-
-                                boolean sharebox = false;
-
-                                for (String box1 : BoW1)
+                                if ((onMeridian(move) || onEquator(move))
+                                        && onStraightWith(move, already))
                                 {
-                                    for (String box2 : BoW2)
+                                    consider.add(move);
+                                }
+                                else if (!(onMeridian(move) || onEquator(move)))
+                                {
+                                    if (onStraightWith(move, already))
                                     {
-                                        if (box1.equals(box2)) sharebox = true;
+                                        consider.add(move);
+                                    }
+                                    else
+                                    {
+                                        Set<String> BoWmove = getBoxesOfWall(move);
+                                        Set<String> BoWalready = getBoxesOfWall(already);
+
+                                        boolean sharebox = false;
+
+                                        for (String box1 : BoWmove)
+                                        {
+                                            for (String box2 : BoWalready)
+                                            {
+                                                if (box1.equals(box2))
+                                                    sharebox = true;
+                                            }
+                                        }
+
+                                        if (sharebox) consider.add(move);
                                     }
                                 }
-
-                                if (sharebox) consider.add(move);
                             }
                         }
                     }
                 }
             }
+            
+            
         }
 
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision
