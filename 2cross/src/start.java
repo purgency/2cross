@@ -9,15 +9,15 @@ import java.util.*;
 public class start
 {
     static Map<String, Integer> _valuemap = new HashMap<String, Integer>();
-    
+
     public static void main(String[] args)
     {
-        String LINE = "f1h7e4";
+        String LINE = "f3h9c6";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
     }
-    
+
     /**
      * Chooses the engine to use based on the turnnumber
      * @param game the position
@@ -28,27 +28,35 @@ public class start
     {
         String position = game;
         AbstractEngine engine;
-        
-        switch(turn)
+
+        switch (turn)
         {
-            case 1: engine = new Move1Engine();
-                break;
-            case 2: engine = new Move2Engine(_valuemap);
-                break;
-            case 3: engine = new Move3Engine(_valuemap);
-                break;
-            case 4: engine = new Move4Engine(_valuemap);
-                break;
-            case 5: engine = new Move5Engine(_valuemap);
-                break;
-            case 6: engine = new Move6Engine(_valuemap);
-                break;
-            case 7: engine = new Move7Engine(_valuemap);
-                break;
-            default: engine = new EndgameEngine(_valuemap);
-                break;
+        case 1:
+            engine = new Move1Engine();
+            break;
+        case 2:
+            engine = new Move2Engine(_valuemap);
+            break;
+        case 3:
+            engine = new Move3Engine(_valuemap);
+            break;
+        case 4:
+            engine = new Move4Engine(_valuemap);
+            break;
+        case 5:
+            engine = new Move5Engine(_valuemap);
+            break;
+        case 6:
+            engine = new Move6Engine(_valuemap);
+            break;
+        case 7:
+            engine = new Move7Engine(_valuemap);
+            break;
+        default:
+            engine = new EndgameEngine(_valuemap);
+            break;
         }
-        
+
         String move = engine.chooseMove(position);
         return move;
     }
@@ -81,10 +89,10 @@ public class start
         line = line.replace("j1", "j01");
         line = line.replace("011", "11");
         line = line.replace("000", "0");
-        
+
         return line;
     }
-    
+
     /**
      * determines turnnumber and
      * initializes the valuemap
@@ -93,18 +101,17 @@ public class start
      */
     public static int getturn(String position)
     {
-        String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6", "d4",
-                "d2", "f10", "f8", "f6", "f4", "f2", "h10", "h8", "h6", "h4", "h2",
-                "j10", "j8", "j6", "j4", "j2"};
-        
-        
+        String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6",
+                "d4", "d2", "f10", "f8", "f6", "f4", "f2", "h10", "h8", "h6",
+                "h4", "h2", "j10", "j8", "j6", "j4", "j2"};
+
         for (int i = 0; i < _boxes.length; i++)
         {
             _valuemap.put(_boxes[i], 0);
         }
         _valuemap.put("scorep1", 0);
         _valuemap.put("scorep2", 0);
-        
+
         int turn = 1;
         String line = position;
 
@@ -142,7 +149,7 @@ public class start
                     if (_valuemap.get(boxL) == 4)
                     {
                         completedBox += 1;
-                        
+
                     }
                 }
                 if (let != 'k')
@@ -180,7 +187,7 @@ public class start
                 if (num != 11)
                 {
                     String boxO = "";
-                        boxO = let + Integer.toString(num + 1);
+                    boxO = let + Integer.toString(num + 1);
                     _valuemap.put(boxO, _valuemap.get(boxO) + 1);
                     if (_valuemap.get(boxO) == 4)
                     {
@@ -190,8 +197,8 @@ public class start
                 if (num != 01)
                 {
                     String boxU = "";
-                          boxU = let + Integer.toString(num - 1);
-                          
+                    boxU = let + Integer.toString(num - 1);
+
                     _valuemap.put(boxU, _valuemap.get(boxU) + 1);
                     if (_valuemap.get(boxU) == 4)
                     {
@@ -200,17 +207,19 @@ public class start
                 }
             }
 
-            if((turn+1)%2==0 && completedBox>0)
+            if ((turn + 1) % 2 == 0 && completedBox > 0)
             {
-                _valuemap.put("scorep1", ( _valuemap.get("scorep1")+completedBox));
+                _valuemap.put("scorep1",
+                        (_valuemap.get("scorep1") + completedBox));
             }
-            else if (completedBox>0)
+            else if (completedBox > 0)
             {
-                _valuemap.put("scorep2", ( _valuemap.get("scorep2")+completedBox));
+                _valuemap.put("scorep2",
+                        (_valuemap.get("scorep2") + completedBox));
             }
-            if (completedBox==0) turn++;
+            if (completedBox == 0) turn++;
         }
         return turn;
-    
+
     }
 }
