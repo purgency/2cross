@@ -264,9 +264,9 @@ public abstract class AbstractEngine
         return boxesofwall;
     }
 
-    public HashSet<String> boxDistance(String move)
+    public HashSet<String> distanceShort(String move)
     {
-        HashSet<String> boxDistance = new HashSet<String>();
+        HashSet<String> distanceShort = new HashSet<String>();
 
         HashSet<String> boxesofwall = getBoxesOfWall(move);
 
@@ -329,12 +329,12 @@ public abstract class AbstractEngine
                 for (int i = 0; i < 6; i++)
                 {
                     if (boxN[i] != null && !boxN[i].contains("null"))
-                        boxDistance.add(boxN[i]);
+                        distanceShort.add(boxN[i]);
                 }
             }
         }
 
-        return boxDistance;
+        return distanceShort;
     }
 
     public boolean isParallelNeighbor(String Neighbor, String of)

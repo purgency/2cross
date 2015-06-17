@@ -39,10 +39,10 @@ public class Move4Engine extends AbstractEngine
         }
         else
         {
-            //TODO: consider outerspokes if isEdge(third) && boxDistance second <-> third
-            Set<String> oBD1 = boxDistance(third);
+            //TODO: consider outerspokes if isEdge(third) && distanceShort second <-> third
+            Set<String> oBD1 = distanceShort(third);
             Set<String> BoWsecond = getBoxesOfWall(second);
-            
+
             boolean close = false;
             for (String box : oBD1)
             {
@@ -54,11 +54,11 @@ public class Move4Engine extends AbstractEngine
                     }
                 }
             }
-            
-            if(isEdge(third) && close)
+
+            if (isEdge(third) && close)
             {
                 Set<String> BoWthird = getBoxesOfWall(third);
-                
+
                 for (String spoke : _outerspoke)
                 {
                     Set<String> BoWspoke = getBoxesOfWall(spoke);
@@ -66,8 +66,7 @@ public class Move4Engine extends AbstractEngine
                     {
                         for (String boxB : BoWspoke)
                         {
-                            if (boxA.equals(boxB))
-                                consider.add(spoke);
+                            if (boxA.equals(boxB)) consider.add(spoke);
                         }
                     }
                 }
@@ -117,8 +116,7 @@ public class Move4Engine extends AbstractEngine
                     }
                 }
             }
-            
-            
+
         }
 
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision

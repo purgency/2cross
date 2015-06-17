@@ -32,7 +32,7 @@ public class Move3Engine extends AbstractEngine
 
             boolean oneBoxDistant = false;
 
-            Set<String> oBD1 = boxDistance(second);
+            Set<String> oBD1 = distanceShort(second);
             Set<String> BoW2 = getBoxesOfWall(move);
             for (String box : oBD1)
             {

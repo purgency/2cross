@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "d1d3a4";
+        String LINE = "a6i8h11i10";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -89,6 +89,7 @@ public class start
         line = line.replace("j1", "j01");
         line = line.replace("011", "11");
         line = line.replace("000", "0");
+        line = line.replace("100", "10");
 
         return line;
     }
@@ -219,6 +220,7 @@ public class start
             }
             if (completedBox == 0) turn++;
         }
+        _valuemap.put("turn", turn);
         return turn;
 
     }
