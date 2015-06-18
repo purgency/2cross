@@ -8,7 +8,6 @@ import java.util.Set;
 
 public class Move3Engine extends AbstractEngine
 {
-    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
 
     public Move3Engine(Map<String, Integer> valuemap)
     {

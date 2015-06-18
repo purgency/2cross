@@ -110,6 +110,7 @@ public abstract class AbstractEngine
             Arrays.asList("a10", "b11", "j11", "k10", "a02", "b01", "j01",
                     "k02"));
     public static final Map<String, String> _keymap = new HashMap<String, String>();
+    static Map<String, Integer> _valuemap = new HashMap<String, Integer>();
 
     public int _numEdge = 0;
     public int _numCenter = 0;
@@ -279,11 +280,11 @@ public abstract class AbstractEngine
 
     //AlphaBeta()
 
-    public boolean isLoony(String move, Map<String, Integer> valuemap)
+    public boolean isLoony(String move)
     {
         boolean result = false;
 
-        if (!isSacrifice(move, valuemap))
+        if (!isSacrifice(move))
         {
             return false;
         }
@@ -292,12 +293,12 @@ public abstract class AbstractEngine
         return result;
     }
 
-    public boolean isSacrifice(String move, Map<String, Integer> valuemap)
+    public boolean isSacrifice(String move)
     {
         HashSet<String> boxesofwall = getBoxesOfWall(move);
         for (String box : boxesofwall)
         {
-            if (valuemap.get(box) == 3) return true;
+            if (_valuemap.get(box) == 3) return true;
         }
 
         return false;

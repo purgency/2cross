@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Move5Engine extends AbstractEngine
 {
-    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
 
     public Move5Engine(Map<String, Integer> valuemap)
     {

@@ -3,7 +3,6 @@ import java.util.*;
 
 public class Move7Engine extends AbstractEngine
 {
-    Map<String, Integer> _valuemap = new HashMap<String, Integer>();
     
     public Move7Engine(Map<String, Integer> valuemap)
     {
