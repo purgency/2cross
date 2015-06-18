@@ -11,6 +11,8 @@ public class EndgameEngine extends AbstractEngine
 
     public String chooseMove(String position)
     {
+        String last = position.substring(position.length()-3, position.length());
+        //boolean sacrifice = isSacrifice(last, _valuemap);
         //checkforsacrifices and loonymoves
 
         Set<String> unplayed = unplayed(position);

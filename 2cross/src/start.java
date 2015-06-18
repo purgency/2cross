@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "a6i8h11i10";
+        String LINE = "http://www.trmph.com/dnb/board#5,a10a8a6a4a2b1d1f1h1k2j1j3";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -90,6 +90,7 @@ public class start
         line = line.replace("011", "11");
         line = line.replace("000", "0");
         line = line.replace("100", "10");
+        line = line.replace("010", "10");
 
         return line;
     }
@@ -102,9 +103,9 @@ public class start
      */
     public static int getturn(String position)
     {
-        String[] _boxes = {"b10", "b8", "b6", "b4", "b2", "d10", "d8", "d6",
-                "d4", "d2", "f10", "f8", "f6", "f4", "f2", "h10", "h8", "h6",
-                "h4", "h2", "j10", "j8", "j6", "j4", "j2"};
+        String[] _boxes = {"b10", "b08", "b06", "b04", "b02", "d10", "d08", "d06",
+                "d04", "d02", "f10", "f08", "f06", "f04", "f02", "h10", "h08", "h06",
+                "h04", "h02", "j10", "j08", "j06", "j04", "j02"};
 
         for (int i = 0; i < _boxes.length; i++)
         {
@@ -112,7 +113,6 @@ public class start
         }
         _valuemap.put("scorep1", 0);
         _valuemap.put("scorep2", 0);
-
         int turn = 1;
         String line = position;
 
@@ -146,8 +146,9 @@ public class start
                         break;
 
                     }
-                    _valuemap.put(boxL, _valuemap.get(boxL) + 1);
-                    if (_valuemap.get(boxL) == 4)
+                    String newBoxL = convert(boxL);
+                    _valuemap.put(newBoxL, _valuemap.get(newBoxL) + 1);
+                    if (_valuemap.get(newBoxL) == 4)
                     {
                         completedBox += 1;
 
@@ -175,8 +176,9 @@ public class start
                         break;
 
                     }
-                    _valuemap.put(boxR, _valuemap.get(boxR) + 1);
-                    if (_valuemap.get(boxR) == 4)
+                    String newBoxR = convert(boxR);
+                    _valuemap.put(newBoxR, _valuemap.get(newBoxR) + 1);
+                    if (_valuemap.get(newBoxR) == 4)
                     {
                         completedBox += 1;
                     }
@@ -189,8 +191,9 @@ public class start
                 {
                     String boxO = "";
                     boxO = let + Integer.toString(num + 1);
-                    _valuemap.put(boxO, _valuemap.get(boxO) + 1);
-                    if (_valuemap.get(boxO) == 4)
+                    String newBoxO = convert(boxO);
+                    _valuemap.put(newBoxO, _valuemap.get(newBoxO) + 1);
+                    if (_valuemap.get(newBoxO) == 4)
                     {
                         completedBox += 1;
                     }
@@ -200,8 +203,9 @@ public class start
                     String boxU = "";
                     boxU = let + Integer.toString(num - 1);
 
-                    _valuemap.put(boxU, _valuemap.get(boxU) + 1);
-                    if (_valuemap.get(boxU) == 4)
+                    String newBoxU = convert(boxU);
+                    _valuemap.put(newBoxU, _valuemap.get(newBoxU) + 1);
+                    if (_valuemap.get(newBoxU) == 4)
                     {
                         completedBox += 1;
                     }
@@ -220,8 +224,8 @@ public class start
             }
             if (completedBox == 0) turn++;
         }
+        
         _valuemap.put("turn", turn);
         return turn;
-
     }
 }

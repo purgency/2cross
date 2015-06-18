@@ -219,7 +219,16 @@ public abstract class AbstractEngine
 
     //isLoony()
 
-    //isSacrifice()
+    public boolean isSacrifice(String move, Map<String, Integer> valuemap)
+    {
+        HashSet<String> boxesofwall = getBoxesOfWall(move);
+        for (String box : boxesofwall)
+        {
+            if(valuemap.get(box)==3) return true;
+        }
+        
+        return false;
+    }
 
     //numQuads()
 
@@ -258,8 +267,8 @@ public abstract class AbstractEngine
             box1 = letP1 + numS;
             box2 = letM1 + numS;
         }
-        boxesofwall.add(box1);
-        boxesofwall.add(box2);
+        if (box1 != null && !box1.contains("null")) boxesofwall.add(box1);
+        if (box2 != null && !box2.contains("null")) boxesofwall.add(box2);
 
         return boxesofwall;
     }
