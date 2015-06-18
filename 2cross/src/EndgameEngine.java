@@ -13,7 +13,6 @@ public class EndgameEngine extends AbstractEngine
         String last = position.substring(position.length()-3, position.length());
         //boolean sacrifice = isSacrifice(last);
         //checkforsacrifices and loonymoves
-
         Set<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
 

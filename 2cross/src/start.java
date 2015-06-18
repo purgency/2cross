@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * Doublecross is a knowledge-based AI for the Dots and values game
+ * Doublecross is a knowledge-based AI for the Dots and Boxes game
  * @author Philipp Quach
  *
  */
@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "http://www.trmph.com/dnb/board#5,a10a8a6a4a2b1d1f1h1j1k2";
+        String LINE = "";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -157,6 +157,14 @@ public class start
                     if (_valuemap.get(newBoxL) == 4)
                     {
                         completedBox += 1;
+                        if ((turn % 2)+1 == 0)
+                        {
+                            _valuemap.put(newBoxL, 5);
+                        }
+                        else
+                        {
+                            _valuemap.put(newBoxL, 6);
+                        }
 
                     }
                 }
@@ -187,6 +195,14 @@ public class start
                     if (_valuemap.get(newBoxR) == 4)
                     {
                         completedBox += 1;
+                        if ((turn % 2)+1 == 0)
+                        {
+                            _valuemap.put(newBoxR, 5);
+                        }
+                        else
+                        {
+                            _valuemap.put(newBoxR, 6);
+                        }
                     }
                 }
             }
@@ -202,6 +218,14 @@ public class start
                     if (_valuemap.get(newBoxO) == 4)
                     {
                         completedBox += 1;
+                        if ((turn % 2)+1 == 0)
+                        {
+                            _valuemap.put(newBoxO, 5);
+                        }
+                        else
+                        {
+                            _valuemap.put(newBoxO, 6);
+                        }
                     }
                 }
                 if (num != 01)
@@ -214,6 +238,14 @@ public class start
                     if (_valuemap.get(newBoxU) == 4)
                     {
                         completedBox += 1;
+                        if ((turn % 2)+1 == 0)
+                        {
+                            _valuemap.put(newBoxU, 5);
+                        }
+                        else
+                        {
+                            _valuemap.put(newBoxU, 6);
+                        }
                     }
                 }
             }
@@ -231,6 +263,10 @@ public class start
             if (completedBox == 0) turn++;
         }
 
+        for (int i=0;i<position.length();i+=3)
+        {
+            _valuemap.put(position.substring(i, i+3), 1);
+        }
         _valuemap.put("turn", turn);
         return turn;
     }
