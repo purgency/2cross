@@ -7,7 +7,7 @@ public class Move1Engine extends AbstractEngine
     {
         List<String> consider = new ArrayList<String>();
 
-        for (String line : _all)
+        for (String line : _allLines)
         {
             if (inCenter(line) || isEdge(line)) consider.add(line);
         }

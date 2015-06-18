@@ -68,7 +68,6 @@ public class EndgameEngine extends AbstractEngine
         }
         else
         {
-            System.out.print("done");
         }
     }
 
@@ -108,7 +107,6 @@ public class EndgameEngine extends AbstractEngine
         }    
         else
         {
-            System.out.print("done");
         }
     }
     

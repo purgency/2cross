@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * Doublecross is a knowledge-based AI for the Dots and Boxes game
+ * Doublecross is a knowledge-based AI for the Dots and values game
  * @author Philipp Quach
  *
  */
@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "http://www.trmph.com/dnb/board#5,a10a8a6a4a2b1d1f1h1k2j1j3";
+        String LINE = "";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -103,16 +103,22 @@ public class start
      */
     public static int getturn(String position)
     {
-        String[] _boxes = {"b10", "b08", "b06", "b04", "b02", "d10", "d08", "d06",
-                "d04", "d02", "f10", "f08", "f06", "f04", "f02", "h10", "h08", "h06",
-                "h04", "h02", "j10", "j08", "j06", "j04", "j02"};
+        String[] _values = {"b10", "b08", "b06", "b04", "b02", "d10", "d08",
+                "d06", "d04", "d02", "f10", "f08", "f06", "f04", "f02", "h10",
+                "h08", "h06", "h04", "h02", "j10", "j08", "j06", "j04", "j02",
+                "scorep1", "scorep2", "b11", "d11", "b11", "d11", "f11", "h11",
+                "j11", "b09", "d09", "f09", "h09", "j09", "b07", "d07", "f07",
+                "h07", "j07", "b05", "d05", "f05", "h05", "j05", "b03", "d03",
+                "f03", "h03", "j03", "b01", "d01", "f01", "h01", "j01", "a10",
+                "c10", "e10", "g10", "i10", "k10", "a08", "c08", "e08", "g08",
+                "i08", "k08", "a06", "c06", "e06", "g06", "i06", "k06", "a04",
+                "c04", "e04", "g04", "i04", "k04", "a02", "c02", "e02", "g02",
+                "i02", "k02"};
 
-        for (int i = 0; i < _boxes.length; i++)
+        for (int i = 0; i < _values.length; i++)
         {
-            _valuemap.put(_boxes[i], 0);
+            _valuemap.put(_values[i], 0);
         }
-        _valuemap.put("scorep1", 0);
-        _valuemap.put("scorep2", 0);
         int turn = 1;
         String line = position;
 
@@ -224,7 +230,7 @@ public class start
             }
             if (completedBox == 0) turn++;
         }
-        
+
         _valuemap.put("turn", turn);
         return turn;
     }

@@ -2,14 +2,45 @@ import java.util.*;
 
 public abstract class AbstractEngine
 {
-    public static final Set<String> _all = new HashSet<String>(Arrays.asList(
-            "b11", "d11", "f11", "h11", "j11", "b09", "d09", "f09", "h09",
-            "j09", "b07", "d07", "f07", "h07", "j07", "b05", "d05", "f05",
-            "h05", "j05", "b03", "d03", "f03", "h03", "j03", "b01", "d01",
-            "f01", "h01", "j01", "a10", "c10", "e10", "g10", "i10", "k10",
-            "a08", "c08", "e08", "g08", "i08", "k08", "a06", "c06", "e06",
-            "g06", "i06", "k06", "a04", "c04", "e04", "g04", "i04", "k04",
-            "a02", "c02", "e02", "g02", "i02", "k02"));
+    public static final String[] _allLines = {"b11", "d11", "f11", "h11",
+            "j11", "b09", "d09", "f09", "h09", "j09", "b07", "d07", "f07",
+            "h07", "j07", "b05", "d05", "f05", "h05", "j05", "b03", "d03",
+            "f03", "h03", "j03", "b01", "d01", "f01", "h01", "j01", "a10",
+            "c10", "e10", "g10", "i10", "k10", "a08", "c08", "e08", "g08",
+            "i08", "k08", "a06", "c06", "e06", "g06", "i06", "k06", "a04",
+            "c04", "e04", "g04", "i04", "k04", "a02", "c02", "e02", "g02",
+            "i02", "k02"};
+    public static final String[] _lineKeys = {"b10", "d10", "f10", "h10",
+            "j10", "b08b10", "d08d10", "f08f10", "h08h10", "j08j10", "b06b08",
+            "d06d08", "f06f08", "h06h08", "j06j08", "b04b06", "d04d06",
+            "f04f06", "h04h06", "j04j06", "b02b04", "d02d04", "f02f04",
+            "h02h04", "j02j04", "b02", "d02", "f02", "h02", "j02", "b10",
+            "b10d10", "d10f10", "f10h10", "h10j10", "k10", "b08", "b08d08",
+            "d08f08", "f08h08", "h08j08", "j08", "b06", "b06d06", "d06f06",
+            "f06h06", "h06j06", "j06", "b04", "b04d04", "d04f04", "f04h04",
+            "h04j04", "j04", "b02", "b02d02", "d02f02", "f02h02", "h02j02",
+            "j02"};
+    public static final String[] _allBoxes = {"b10", "b08", "b06", "b04",
+            "b02", "d10", "d08", "d06", "d04", "d02", "f10", "f08", "f06",
+            "f04", "f02", "h10", "h08", "h06", "h04", "h02", "j10", "j08",
+            "j06", "j04", "j02"};
+    public static final String[] _boxKeys = {"b11a10c10b09", "b09a08c08b07",
+            "b07a06c06b05", "b05a04c04b03", "b03a02c02b01", "d11c10e10d09",
+            "d09c08e08d07", "d07c06e06d05", "d05c04e04d03", "d03c02e02d01",
+            "f11e10g10f09", "f09e08g08f07", "f07e06g06f05", "f05e04g04f03",
+            "f03e02g02f01", "h11g10i10h09", "h09g08i08h07", "h07g06i06h05",
+            "h05g04i04h03", "h03g02i02h01", "j11i10k10j09", "j09i08k08j07",
+            "j07i06k06j05", "j05i04k04j03", "j03i02k02j01"};
+    public static final Set<String> _parallelNeighbors = new HashSet<String>(
+            Arrays.asList("a10c10", "a08c08", "a06c06", "a04c04", "a02c02",
+                    "c10e10", "c08e08", "c06e06", "c04e04", "c02e02", "e10g10",
+                    "e08g08", "e06g06", "e04g04", "e02g02", "g10i10", "g08i08",
+                    "g06i06", "g04i04", "g02i02", "i10k10", "i08k08", "i06k06",
+                    "i04k04", "i02k02", "b11b09", "d11d09", "f11f09", "h11h09",
+                    "j11j09", "b09b07", "d09d07", "f09f07", "h09h07", "j09j07",
+                    "b07b05", "d07d05", "f07f05", "h07h05", "j07j05", "b05b03",
+                    "d05d03", "f05f03", "h05h03", "j05j03", "b03b01", "d03d01",
+                    "f03f01", "h03h01", "j03j01"));
     public static final Set<String> _horizontal = new HashSet<String>(
             Arrays.asList("b11", "d11", "f11", "h11", "j11", "b09", "d09",
                     "f09", "h09", "j09", "b07", "d07", "f07", "h07", "j07",
@@ -60,6 +91,7 @@ public abstract class AbstractEngine
     public static final Set<String> _corner = new HashSet<String>(
             Arrays.asList("a10", "b11", "j11", "k10", "a02", "b01", "j01",
                     "k02"));
+    public static final Map<String, String> _keymap = new HashMap<String, String>();
 
     public int _numEdge = 0;
     public int _numCenter = 0;
@@ -71,6 +103,18 @@ public abstract class AbstractEngine
     public int _numRight = 0;
     public int _numThirdRow = 0;
     public int _numCenterspoke = 0;
+
+    public AbstractEngine()
+    {
+        for (int i = 0; i < _allLines.length; i++)
+        {
+            _keymap.put(_allLines[i], _lineKeys[i]);
+        }
+        for (int i = 0; i < _allBoxes.length; i++)
+        {
+            _keymap.put(_allBoxes[i], _boxKeys[i]);
+        }
+    }
 
     public boolean isHorizontal(String move)
     {
@@ -156,7 +200,7 @@ public abstract class AbstractEngine
     {
         HashSet<String> unplayed = new HashSet<String>();
 
-        for (String line : _all)
+        for (String line : _allLines)
         {
             if (!(position.contains(line))) unplayed.add(line);
         }
@@ -217,16 +261,27 @@ public abstract class AbstractEngine
 
     //AlphaBeta()
 
-    //isLoony()
+    public boolean isLoony(String move, Map<String, Integer> valuemap)
+    {
+        boolean result = false;
+
+        if (!isSacrifice(move, valuemap))
+        {
+            return false;
+        }
+        HashSet<String> boxesofwall = getBoxesOfWall(move);
+
+        return result;
+    }
 
     public boolean isSacrifice(String move, Map<String, Integer> valuemap)
     {
         HashSet<String> boxesofwall = getBoxesOfWall(move);
         for (String box : boxesofwall)
         {
-            if(valuemap.get(box)==3) return true;
+            if (valuemap.get(box) == 3) return true;
         }
-        
+
         return false;
     }
 
@@ -346,40 +401,16 @@ public abstract class AbstractEngine
         return distanceShort;
     }
 
-    public boolean isParallelNeighbor(String Neighbor, String of)
+    public boolean isParallelNeighbor(String move1, String move2)
     {
-        boolean result = false;
-        int num = Integer.parseInt(of.substring(1, 3));
-        String let = of.substring(0, 1);
-        String numS = start.convert(Integer.toString(num));
-        String numP2 = start.convert(Integer.toString(num + 2));
-        String numM2 = start.convert(Integer.toString(num - 2));
-        String letP2 = null;
-        String letM2 = null;
-
-        if (isHorizontal(of))
+        if(_parallelNeighbors.contains(move1 + move2) || _parallelNeighbors.contains(move2 + move1))
         {
-            if (Neighbor.equals(let + numP2) || Neighbor.equals(let + numM2))
-                result = true;
+            return true;
         }
         else
         {
-            String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-                    "k"};
-            for (int i = 0; i < abc.length; i++)
-            {
-                if (let.equals(abc[i]))
-                {
-                    if (!let.equals("j") && !let.equals("k"))
-                        letP2 = abc[i + 2];
-                    if (!let.equals("b") && !let.equals("a"))
-                        letM2 = abc[i - 2];
-                }
-            }
-            if (Neighbor.equals(letP2 + numS) || Neighbor.equals(letM2 + numS))
-                result = true;
+            return false;
         }
-        return result;
     }
 
     public boolean onStraightWith(String move1, String move2)
