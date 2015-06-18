@@ -290,42 +290,19 @@ public abstract class AbstractEngine
     public HashSet<String> getBoxesOfWall(String move)
     {
         HashSet<String> boxesofwall = new HashSet<String>();
-        String box1;
-        String box2;
-
-        int num = Integer.parseInt(move.substring(1, 3));
-        String let = move.substring(0, 1);
-        String numS = start.convert(Integer.toString(num));
-        String numP1 = start.convert(Integer.toString(num + 1));
-        String numM1 = start.convert(Integer.toString(num - 1));
-        String letP1 = null;
-        String letM1 = null;
-
-        if (isHorizontal(move))
+        
+        String boxes = _keymap.get(move);
+        String box1 = boxes.substring(0, 3);
+        boxesofwall.add(box1);
+        
+        if(boxes.length()==6)
         {
-            box1 = let + numP1;
-            box2 = let + numM1;
+            String box2 = boxes.substring(3, 6);
+            boxesofwall.add(box2);
         }
-        else
-        {
-            String[] abc = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
-                    "k"};
-            for (int i = 0; i < abc.length; i++)
-            {
-                if (let.equals(abc[i]))
-                {
-                    if (!let.equals("k")) letP1 = abc[i + 1];
-                    if (!let.equals("a")) letM1 = abc[i - 1];
-                }
-            }
-
-            box1 = letP1 + numS;
-            box2 = letM1 + numS;
-        }
-        if (box1 != null && !box1.contains("null")) boxesofwall.add(box1);
-        if (box2 != null && !box2.contains("null")) boxesofwall.add(box2);
-
+        
         return boxesofwall;
+        
     }
 
     public HashSet<String> distanceShort(String move)
