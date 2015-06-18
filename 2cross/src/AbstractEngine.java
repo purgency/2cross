@@ -10,19 +10,19 @@ public abstract class AbstractEngine
             "i08", "k08", "a06", "c06", "e06", "g06", "i06", "k06", "a04",
             "c04", "e04", "g04", "i04", "k04", "a02", "c02", "e02", "g02",
             "i02", "k02"};
-    public static final String[] _lineKeys = {"b10", "d10", "f10", "h10",
-            "j10", "b08b10", "d08d10", "f08f10", "h08h10", "j08j10", "b06b08",
-            "d06d08", "f06f08", "h06h08", "j06j08", "b04b06", "d04d06",
-            "f04f06", "h04h06", "j04j06", "b02b04", "d02d04", "f02f04",
-            "h02h04", "j02j04", "b02", "d02", "f02", "h02", "j02", "b10",
-            "b10d10", "d10f10", "f10h10", "h10j10", "k10", "b08", "b08d08",
-            "d08f08", "f08h08", "h08j08", "j08", "b06", "b06d06", "d06f06",
-            "f06h06", "h06j06", "j06", "b04", "b04d04", "d04f04", "f04h04",
-            "h04j04", "j04", "b02", "b02d02", "d02f02", "f02h02", "h02j02",
-            "j02"};
-    public static final String[] _allBoxes = {"b10", "b08", "b06", "b04",
-            "b02", "d10", "d08", "d06", "d04", "d02", "f10", "f08", "f06",
-            "f04", "f02", "h10", "h08", "h06", "h04", "h02", "j10", "j08",
+    public static final String[] _lineKeys = {"b010", "d010", "f010", "h010",
+            "j010", "b08b010", "d08d010", "f08f010", "h08h010", "j08j010",
+            "b06b08", "d06d08", "f06f08", "h06h08", "j06j08", "b04b06",
+            "d04d06", "f04f06", "h04h06", "j04j06", "b02b04", "d02d04",
+            "f02f04", "h02h04", "j02j04", "b02", "d02", "f02", "h02", "j02",
+            "b010", "b010d010", "d010f010", "f010h010", "h010j010", "k10",
+            "b08", "b08d08", "d08f08", "f08h08", "h08j08", "j08", "b06",
+            "b06d06", "d06f06", "f06h06", "h06j06", "j06", "b04", "b04d04",
+            "d04f04", "f04h04", "h04j04", "j04", "b02", "b02d02", "d02f02",
+            "f02h02", "h02j02", "j02"};
+    public static final String[] _allBoxes = {"b010", "b08", "b06", "b04",
+            "b02", "d010", "d08", "d06", "d04", "d02", "f010", "f08", "f06",
+            "f04", "f02", "h010", "h08", "h06", "h04", "h02", "j010", "j08",
             "j06", "j04", "j02"};
     public static final String[] _boxKeys = {"b11a10c10b09", "b09a08c08b07",
             "b07a06c06b05", "b05a04c04b03", "b03a02c02b01", "d11c10e10d09",
@@ -41,6 +41,24 @@ public abstract class AbstractEngine
                     "b07b05", "d07d05", "f07f05", "h07h05", "j07j05", "b05b03",
                     "d05d03", "f05f03", "h05h03", "j05j03", "b03b01", "d03d01",
                     "f03f01", "h03h01", "j03j01"));
+    public static final Set<String> _adjacentNeighbors = new HashSet<String>(
+            Arrays.asList("b11a10", "d11c10", "f11e10", "h11g10", "j11i10",
+                    "b11c10", "d11e10", "f11g10", "h11i10", "j11k10", "b09a10",
+                    "d09c10", "f09e10", "h09g10", "j09i10", "b09c10", "d09e10",
+                    "f09g10", "h09i10", "j09k10", "b09a08", "d09c08", "f09e08",
+                    "h09g08", "j09i08", "b09c08", "d09e08", "f09g08", "h09i08",
+                    "j09k08", "b07a08", "d07c08", "f07e08", "h07g08", "j07i08",
+                    "b07c08", "d07e08", "f07g08", "h07i08", "j07k08", "b07a06",
+                    "d07c06", "f07e06", "h07g06", "j07i06", "b07c06", "d07e06",
+                    "f07g06", "h07i06", "j07k06", "b05a06", "d05c06", "f05e06",
+                    "h05g06", "j05i06", "b05c06", "d05e06", "f05g06", "h05i06",
+                    "j05k06", "b05a04", "d05c04", "f05e04", "h05g04", "j05i04",
+                    "b05c04", "d05e04", "f05g04", "h05i04", "j05k04", "b03a04",
+                    "d03c04", "f03e04", "h03g04", "j03i04", "b03c04", "d03e04",
+                    "f03g04", "h03i04", "j03k04", "b03c04", "d03e04", "f03g04",
+                    "h03i04", "j03k04", "b03c02", "d03e02", "f03g02", "h03i02",
+                    "j03k02", "b01a02", "d01c02", "f01e02", "h01g02", "j01i02",
+                    "b01c02", "d01e02", "f01g02", "h01i02", "j01k02"));
     public static final Set<String> _horizontal = new HashSet<String>(
             Arrays.asList("b11", "d11", "f11", "h11", "j11", "b09", "d09",
                     "f09", "h09", "j09", "b07", "d07", "f07", "h07", "j07",
@@ -290,19 +308,19 @@ public abstract class AbstractEngine
     public HashSet<String> getBoxesOfWall(String move)
     {
         HashSet<String> boxesofwall = new HashSet<String>();
-        
+
         String boxes = _keymap.get(move);
         String box1 = boxes.substring(0, 3);
         boxesofwall.add(box1);
-        
-        if(boxes.length()==6)
+
+        if (boxes.length() == 6)
         {
             String box2 = boxes.substring(3, 6);
             boxesofwall.add(box2);
         }
-        
+
         return boxesofwall;
-        
+
     }
 
     public HashSet<String> distanceShort(String move)
@@ -380,7 +398,21 @@ public abstract class AbstractEngine
 
     public boolean isParallelNeighbor(String move1, String move2)
     {
-        if(_parallelNeighbors.contains(move1 + move2) || _parallelNeighbors.contains(move2 + move1))
+        if (_parallelNeighbors.contains(move1 + move2)
+                || _parallelNeighbors.contains(move2 + move1))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public boolean isAdjacentNeighbor(String move1, String move2)
+    {
+        if (_adjacentNeighbors.contains(move1 + move2)
+                || _adjacentNeighbors.contains(move2 + move1))
         {
             return true;
         }
@@ -408,8 +440,6 @@ public abstract class AbstractEngine
         }
         return result;
     }
-
-    //isAdjacentNeighbor(move)
 
     /**
      * Algorithm to determine the move to play, individually different for each turn
