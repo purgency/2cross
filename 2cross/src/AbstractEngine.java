@@ -292,20 +292,22 @@ public abstract class AbstractEngine
         HashSet<String> boxesofmove = getBoxesOfWall(move);
         for (String box : boxesofmove)
         {
-            String walls = _keymap.get(box);
-            String wall = null;
-            for (int i = 0; i < walls.length(); i += 3)
+            if (_valuemap.get(box) == 3)
             {
-                wall = walls.substring(i, i + 3);
-                if (_valuemap.get(wall) == 0) break;
+                String walls = _keymap.get(box);
+                String wall = null;
+                for (int i = 0; i < walls.length(); i += 3)
+                {
+                    wall = walls.substring(i, i + 3);
+                    if (_valuemap.get(wall) == 0) break;
+                }
+                HashSet<String> boxesofwall = getBoxesOfWall(wall);
+                for (String box2 : boxesofwall)
+                {
+                    if (!boxesofmove.contains(box2) && _valuemap.get(box2) == 2)
+                        return true;
+                }
             }
-            HashSet<String> boxesofwall = getBoxesOfWall(wall);
-            for (String box2 : boxesofwall)
-            {
-                if (!boxesofmove.contains(box2) && _valuemap.get(box2) == 2)
-                    return true;
-            }
-
         }
         return false;
     }
@@ -321,10 +323,17 @@ public abstract class AbstractEngine
         return false;
     }
 
+    public HashSet<String> mergeLoonyMoves(HashSet<String> lines, String move)
+    {
+        //isLoony(move) first
+
+        return null;
+    }
+
     public String takeFreeBoxes(String move, boolean loony)
     {
         String additional = "";
-        
+
         if (loony)
         {
 
