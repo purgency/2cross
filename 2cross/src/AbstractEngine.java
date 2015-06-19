@@ -11,15 +11,15 @@ public abstract class AbstractEngine
             "c04", "e04", "g04", "i04", "k04", "a02", "c02", "e02", "g02",
             "i02", "k02"};
     public static final String[] _lineKeys = {"b10", "d10", "f10", "h10",
-            "j10", "b08b10", "d08d10", "f08f10", "h08h10", "j08j10",
-            "b06b08", "d06d08", "f06f08", "h06h08", "j06j08", "b04b06",
-            "d04d06", "f04f06", "h04h06", "j04j06", "b02b04", "d02d04",
-            "f02f04", "h02h04", "j02j04", "b02", "d02", "f02", "h02", "j02",
-            "b10", "b10d10", "d10f10", "f10h10", "h10j10", "k10",
-            "b08", "b08d08", "d08f08", "f08h08", "h08j08", "j08", "b06",
-            "b06d06", "d06f06", "f06h06", "h06j06", "j06", "b04", "b04d04",
-            "d04f04", "f04h04", "h04j04", "j04", "b02", "b02d02", "d02f02",
-            "f02h02", "h02j02", "j02"};
+            "j10", "b08b10", "d08d10", "f08f10", "h08h10", "j08j10", "b06b08",
+            "d06d08", "f06f08", "h06h08", "j06j08", "b04b06", "d04d06",
+            "f04f06", "h04h06", "j04j06", "b02b04", "d02d04", "f02f04",
+            "h02h04", "j02j04", "b02", "d02", "f02", "h02", "j02", "b10",
+            "b10d10", "d10f10", "f10h10", "h10j10", "k10", "b08", "b08d08",
+            "d08f08", "f08h08", "h08j08", "j08", "b06", "b06d06", "d06f06",
+            "f06h06", "h06j06", "j06", "b04", "b04d04", "d04f04", "f04h04",
+            "h04j04", "j04", "b02", "b02d02", "d02f02", "f02h02", "h02j02",
+            "j02"};
     public static final String[] _allBoxes = {"b10", "b08", "b06", "b04",
             "b02", "d10", "d08", "d06", "d04", "d02", "f10", "f08", "f06",
             "f04", "f02", "h10", "h08", "h06", "h04", "h02", "j10", "j08",
@@ -282,15 +282,28 @@ public abstract class AbstractEngine
 
     public boolean isLoony(String move)
     {
-        boolean result = false;
-
         if (!isSacrifice(move))
         {
             return false;
         }
-        HashSet<String> boxesofwall = getBoxesOfWall(move);
-
-        return result;
+        HashSet<String> boxesofmove = getBoxesOfWall(move);
+        for (String box : boxesofmove)
+        {
+            String walls = _keymap.get(box);
+            String wall = null;
+            for (int i = 0; i < walls.length(); i += 3)
+            {
+                wall = walls.substring(i, i + 3);
+                if(_valuemap.get(wall)==0) break;
+            }
+            HashSet<String> boxesofwall = getBoxesOfWall(wall);
+            for (String box2 : boxesofwall)
+            {
+                if(!boxesofmove.contains(box2) && _valuemap.get(box2)==2) return true;
+            }
+            
+        }
+        return false;
     }
 
     public boolean isSacrifice(String move)
