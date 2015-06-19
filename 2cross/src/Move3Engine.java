@@ -39,8 +39,16 @@ public class Move3Engine extends AbstractEngine
                 {
                     for (String boxS : BoW2)
                     {
-                        if (boxS.equals(box)) oneBoxDistant = true;
+                        if (boxS.equals(box))
+                        {
+                            oneBoxDistant = true;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
             if ((!oneBoxDistant || isParallelNeighbor(move, second))

@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "";
+        String LINE = "k6c8d11";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 

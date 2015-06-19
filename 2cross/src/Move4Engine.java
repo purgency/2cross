@@ -31,14 +31,16 @@ public class Move4Engine extends AbstractEngine
                 {
                     if (isParallelNeighbor(move, already)
                             || onStraightWith(move, already))
+                    {
                         removal.add(move);
+                        break;
+                    }
                 }
             }
             consider.removeAll(removal);
         }
         else
         {
-            //TODO: consider outerspokes if isEdge(third) && distanceShort second <-> third
             Set<String> oBD1 = distanceShort(third);
             Set<String> BoWsecond = getBoxesOfWall(second);
 
@@ -49,24 +51,23 @@ public class Move4Engine extends AbstractEngine
                 {
                     for (String boxS : BoWsecond)
                     {
-                        if (boxS.equals(box)) close = true;
+                        if (boxS.equals(box))
+                        {
+                            close = true;
+                            break;
+                        }
                     }
                 }
             }
 
             if (isEdge(third) && close)
             {
-                Set<String> BoWthird = getBoxesOfWall(third);
-
                 for (String spoke : _outerspoke)
                 {
-                    Set<String> BoWspoke = getBoxesOfWall(spoke);
-                    for (String boxA : BoWthird)
+                    if (isAdjacentNeighbor(spoke, third))
                     {
-                        for (String boxB : BoWspoke)
-                        {
-                            if (boxA.equals(boxB)) consider.add(spoke);
-                        }
+                        consider.add(spoke);
+                        break;
                     }
                 }
             }
@@ -84,30 +85,22 @@ public class Move4Engine extends AbstractEngine
                                         && onStraightWith(move, already))
                                 {
                                     consider.add(move);
+                                    break;
                                 }
                                 else if (!(onMeridian(move) || onEquator(move)))
                                 {
                                     if (onStraightWith(move, already))
                                     {
                                         consider.add(move);
+                                        break;
                                     }
                                     else
                                     {
-                                        Set<String> BoWmove = getBoxesOfWall(move);
-                                        Set<String> BoWalready = getBoxesOfWall(already);
-
-                                        boolean sharebox = false;
-
-                                        for (String box1 : BoWmove)
+                                        if (isAdjacentNeighbor(move, already))
                                         {
-                                            for (String box2 : BoWalready)
-                                            {
-                                                if (box1.equals(box2))
-                                                    sharebox = true;
-                                            }
+                                            consider.add(move);
+                                            break;
                                         }
-
-                                        if (sharebox) consider.add(move);
                                     }
                                 }
                             }
