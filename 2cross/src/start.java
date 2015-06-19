@@ -12,7 +12,7 @@ public class start
 
     public static void main(String[] args)
     {
-        String LINE = "http://www.trmph.com/dnb/board#5,b11d11f11h11j11a10a8a6a4a2f5f7f9i8c8g8";
+        String LINE = "http://www.trmph.com/dnb/board#5,f5f7h5d7f3g8a6c8b7d5d3i6e10e8f9d9b11c10d11h7g6e6c6b5h3h11k6i10j3j5j7b3e2h1g2f1i2i8h9f11g10a2j11k2j1c2d1b1b9";
         String result = play(convert(LINE), getturn(convert(LINE)));
         System.out.println(result);
 
@@ -22,7 +22,7 @@ public class start
      * Chooses the engine to use based on the turnnumber
      * @param game the position
      * @param turn the turnnumber
-     * @return
+     * @return move to play
      */
     public static String play(String game, int turn)
     {

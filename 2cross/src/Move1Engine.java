@@ -12,6 +12,7 @@ public class Move1Engine extends AbstractEngine
             if (inCenter(line) || isEdge(line)) consider.add(line);
         }
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision
+        _valuemap.put(consider.get(0), 1);
         return consider.get(0);
     }
 }

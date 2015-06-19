@@ -74,6 +74,7 @@ public class Move2Engine extends AbstractEngine
         }
 
         Collections.shuffle(consider); //TODO: possibly win/loss userstatistic for decision
+        _valuemap.put(consider.get(0), 1);
         return consider.get(0);
     }
 }

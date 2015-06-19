@@ -280,12 +280,15 @@ public abstract class AbstractEngine
 
     //AlphaBeta()
 
+    /**
+     * ALWAYS CHECK IF SACRIFICE FIRST
+     * tells whether a move is loony or not
+     * @param move the move checked for looniness
+     * @return yes or no
+     */
     public boolean isLoony(String move)
     {
-        if (!isSacrifice(move))
-        {
-            return false;
-        }
+        //isSacrifice(move) first
         HashSet<String> boxesofmove = getBoxesOfWall(move);
         for (String box : boxesofmove)
         {
@@ -294,14 +297,15 @@ public abstract class AbstractEngine
             for (int i = 0; i < walls.length(); i += 3)
             {
                 wall = walls.substring(i, i + 3);
-                if(_valuemap.get(wall)==0) break;
+                if (_valuemap.get(wall) == 0) break;
             }
             HashSet<String> boxesofwall = getBoxesOfWall(wall);
             for (String box2 : boxesofwall)
             {
-                if(!boxesofmove.contains(box2) && _valuemap.get(box2)==2) return true;
+                if (!boxesofmove.contains(box2) && _valuemap.get(box2) == 2)
+                    return true;
             }
-            
+
         }
         return false;
     }
@@ -315,6 +319,36 @@ public abstract class AbstractEngine
         }
 
         return false;
+    }
+
+    public String takeFreeBoxes(String move, boolean loony)
+    {
+        String additional = "";
+        
+        if (loony)
+        {
+
+        }
+        else
+        {
+            HashSet<String> boxesofwall = getBoxesOfWall(move);
+            for (String box : boxesofwall)
+            {
+                String walls = _keymap.get(box);
+                String wall = null;
+                for (int i = 0; i < walls.length(); i += 3)
+                {
+                    wall = walls.substring(i, i + 3);
+                    if (_valuemap.get(wall) == 0)
+                    {
+                        additional = additional.concat(wall);
+                        _valuemap.put(wall, 1);
+                    }
+                }
+            }
+        }
+
+        return additional;
     }
 
     //numQuads()
