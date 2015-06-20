@@ -75,21 +75,22 @@ public class Move4Engine extends AbstractEngine
             {
                 for (String move : unplayed)
                 {
-                    for (String already : played)
+                    if (!(isParallelNeighbor(move, third) && isEdge(third)) && !thisMoveisSacrifice(move))
                     {
-                        if (onThirdrow(already) && onThirdrow(move))
+                        for (String already : played)
                         {
-                            if (!(isParallelNeighbor(move, third) && isEdge(third)))
+                            if (onThirdrow(already) && onThirdrow(move))
                             {
+
                                 if ((onMeridian(move) || onEquator(move))
-                                        && onStraightWith(move, already))
+                                        && isStraightNeighbor(move, already))
                                 {
                                     consider.add(move);
                                     break;
                                 }
                                 else if (!(onMeridian(move) || onEquator(move)))
                                 {
-                                    if (onStraightWith(move, already))
+                                    if (isStraightNeighbor(move, already))
                                     {
                                         consider.add(move);
                                         break;

@@ -16,7 +16,7 @@ public class EndgameEngine extends AbstractEngine
         //boolean loony = isLoony(last);
         HashSet<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
-        mergeLoonyMoves(unplayed, last);
+        //mergeLoonyMoves(unplayed, last);
         if ((_valuemap.get("turn") % 2) == 0) //first player turn
         {
             SearchP1(last, unplayed);
@@ -35,7 +35,7 @@ public class EndgameEngine extends AbstractEngine
     {
         if (!unplayed.isEmpty())
         {
-            if (isSacrifice(last))
+            if (lastMoveisSacrifice(last))
             {
                 String taken = takeFreeBoxes(last, false);
                 for (int i = 0; i < taken.length(); i += 3)
@@ -83,7 +83,7 @@ public class EndgameEngine extends AbstractEngine
     {
         if (!unplayed.isEmpty())
         {
-            if (isSacrifice(last))
+            if (lastMoveisSacrifice(last))
             {
                 String taken = takeFreeBoxes(last, false);
                 for (int i = 0; i < taken.length(); i += 3)

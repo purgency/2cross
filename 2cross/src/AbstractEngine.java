@@ -59,6 +59,16 @@ public abstract class AbstractEngine
                     "h03i04", "j03k04", "b03c02", "d03e02", "f03g02", "h03i02",
                     "j03k02", "b01a02", "d01c02", "f01e02", "h01g02", "j01i02",
                     "b01c02", "d01e02", "f01g02", "h01i02", "j01k02"));
+    public static final Set<String> _straightNeighbors = new HashSet<String>(
+            Arrays.asList("b11d11", "d11f11", "f11h11", "h11j11", "b09d09",
+                    "d09f09", "f09h09", "h09j09", "b07d07", "d07f07", "f07h07",
+                    "h07j07", "b05d05", "d05f05", "f05h05", "h05j05", "b03d03",
+                    "d03f03", "f03h03", "h03j03", "b01d01", "d01f01", "f01h01",
+                    "h01j01", "a10a08", "a08a06", "a06a04", "a04a02", "c10c08",
+                    "c08c06", "c06c04", "c04c02", "e10e08", "e08e06", "e06e04",
+                    "e04e02", "g10g08", "g08g06", "g06g04", "g04g02", "i10i08",
+                    "i08i06", "i06i04", "i04i02", "k10k08", "k08k06", "k06k04",
+                    "k04k02"));
     public static final Set<String> _horizontal = new HashSet<String>(
             Arrays.asList("b11", "d11", "f11", "h11", "j11", "b09", "d09",
                     "f09", "h09", "j09", "b07", "d07", "f07", "h07", "j07",
@@ -312,7 +322,7 @@ public abstract class AbstractEngine
         return false;
     }
 
-    public boolean isSacrifice(String move)
+    public boolean lastMoveisSacrifice(String move)
     {
         HashSet<String> boxesofwall = getBoxesOfWall(move);
         for (String box : boxesofwall)
@@ -322,11 +332,21 @@ public abstract class AbstractEngine
 
         return false;
     }
+    
+    public boolean thisMoveisSacrifice(String move)
+    {
+        HashSet<String> boxesofwall = getBoxesOfWall(move);
+        for (String box : boxesofwall)
+        {
+            if (_valuemap.get(box) == 2) return true;
+        }
 
-    public Set<String> mergeLoonyMoves(HashSet<String> lines, String move)
+        return false;
+    }
+
+    public Set<String> mergeLoonyMoves(HashSet<String> merge, String move)
     {
         //isLoony(move) first
-        Set<String> merged = lines;
         Set<String> removal = new HashSet<String>();
         Set<String> startboxes = getBoxesOfWall(move);
         for (String around : startboxes)
@@ -343,7 +363,8 @@ public abstract class AbstractEngine
                     for (int i = 0; i < walls.length(); i += 3)
                     {
                         wall = walls.substring(i, i + 3);
-                        if (_valuemap.get(wall) == 0 && !removal.contains(wall)) break;
+                        if (_valuemap.get(wall) == 0 && !removal.contains(wall))
+                            break;
                     }
                     removal.add(wall);
                     Set<String> boxesofwall = getBoxesOfWall(wall);
@@ -365,8 +386,13 @@ public abstract class AbstractEngine
                 }
             }
         }
-        merged.removeAll(removal);
-        return merged;
+        merge.removeAll(removal);
+        return merge;
+    }
+
+    public void loonyIn2chain()
+    {
+
     }
 
     public String takeFreeBoxes(String move, boolean loony)
@@ -509,6 +535,19 @@ public abstract class AbstractEngine
     {
         if (_adjacentNeighbors.contains(move1 + move2)
                 || _adjacentNeighbors.contains(move2 + move1))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    public boolean isStraightNeighbor(String move1, String move2)
+    {
+        if (_straightNeighbors.contains(move1 + move2)
+                || _straightNeighbors.contains(move2 + move1))
         {
             return true;
         }
