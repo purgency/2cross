@@ -323,11 +323,50 @@ public abstract class AbstractEngine
         return false;
     }
 
-    public HashSet<String> mergeLoonyMoves(HashSet<String> lines, String move)
+    public Set<String> mergeLoonyMoves(HashSet<String> lines, String move)
     {
         //isLoony(move) first
-
-        return null;
+        Set<String> merged = lines;
+        Set<String> removal = new HashSet<String>();
+        Set<String> startboxes = getBoxesOfWall(move);
+        for (String around : startboxes)
+        {
+            if (_valuemap.get(around) == 3)
+            {
+                boolean kontinue = true;
+                String box = around;
+                Set<String> boxesofmove = startboxes;
+                while (kontinue)
+                {
+                    String walls = _keymap.get(box);
+                    String wall = null;
+                    for (int i = 0; i < walls.length(); i += 3)
+                    {
+                        wall = walls.substring(i, i + 3);
+                        if (_valuemap.get(wall) == 0 && !removal.contains(wall)) break;
+                    }
+                    removal.add(wall);
+                    Set<String> boxesofwall = getBoxesOfWall(wall);
+                    for (String box2 : boxesofwall)
+                    {
+                        if (!boxesofmove.contains(box2)
+                                && _valuemap.get(box2) == 2)
+                        {
+                            box = box2;
+                            boxesofmove = boxesofwall;
+                            kontinue = true;
+                            break;
+                        }
+                        else
+                        {
+                            kontinue = false;
+                        }
+                    }
+                }
+            }
+        }
+        merged.removeAll(removal);
+        return merged;
     }
 
     public String takeFreeBoxes(String move, boolean loony)

@@ -14,9 +14,9 @@ public class EndgameEngine extends AbstractEngine
                 position.length());
         //boolean sacrifice = isSacrifice(last);
         //boolean loony = isLoony(last);
-        Set<String> unplayed = unplayed(position);
+        HashSet<String> unplayed = unplayed(position);
         ArrayList<String> played = played(position);
-
+        mergeLoonyMoves(unplayed, last);
         if ((_valuemap.get("turn") % 2) == 0) //first player turn
         {
             SearchP1(last, unplayed);
